@@ -1,6 +1,7 @@
 ﻿using FitnessApp.Data;
 using FitnessApp.DatabaseClasses;
 using FitnessApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,21 @@ namespace FitnessApp.Repositories
             this.context = context;
         }
 
-        public async Task<List<ExerciseModel>> GetExercises()
+        public async Task<List<ExerciseModel>> GetAllExercises()
         {
-            return null;
+            var exerciseEntities = await context.Exercises.ToListAsync();
+            var exercises = new List<ExerciseModel>();
+            foreach (Exercise exercise in exerciseEntities)
+            {
+                ExerciseModel newModel = new ExerciseModel
+                {
+                    ExerciseId = exercise.ExerciseId,
+                    Name = exercise.Name,
+                    Discription = exercise.Discription
+                };
+            }
+            return exercises;
         }
+
     }
 }
