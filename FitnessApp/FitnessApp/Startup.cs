@@ -12,6 +12,7 @@ using FitnessApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FitnessApp.Repositories;
 
 namespace FitnessApp
 {
@@ -27,6 +28,11 @@ namespace FitnessApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.AddScoped<IPerformedExerciseRepository, PerformedExerciseRepository>();
+            services.AddScoped<IRepsOfExerciseRepository, RepsOfExerciseRepository>();
+            services.AddScoped<IWorkoutFormRepository, WorkoutFormRepository>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

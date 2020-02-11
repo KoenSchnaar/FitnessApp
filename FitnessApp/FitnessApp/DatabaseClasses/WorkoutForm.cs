@@ -19,6 +19,5 @@ namespace FitnessApp.DatabaseClasses
         public int Month { get; set; }
         public int Year { get; set; }
 
-
     }
 }
