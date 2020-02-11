@@ -4,14 +4,16 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200211103336_CreatieDatabase")]
+    partial class CreatieDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("WorkoutFormId");
 
-                    b.ToTable("PerformedExercises");
+                    b.ToTable("WorkoutFormRows");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.RepsOfExercise", b =>
@@ -75,7 +77,7 @@ namespace FitnessApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PerformedExerciseId")
+                    b.Property<int?>("ExercisePerformedExerciseId")
                         .HasColumnType("int");
 
                     b.Property<int>("Reps")
@@ -86,7 +88,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasKey("RepsOfExerciseId");
 
-                    b.HasIndex("PerformedExerciseId");
+                    b.HasIndex("ExercisePerformedExerciseId");
 
                     b.ToTable("RepsOfExercises");
                 });
@@ -342,9 +344,7 @@ namespace FitnessApp.Data.Migrations
                 {
                     b.HasOne("FitnessApp.DatabaseClasses.PerformedExercise", "Exercise")
                         .WithMany("Reps")
-                        .HasForeignKey("PerformedExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExercisePerformedExerciseId");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.WorkoutForm", b =>
