@@ -1,0 +1,17 @@
+﻿@model FitnessApp.Models.ExerciseModel
+
+
+<form method="post" asp-controller="Exercise" asp-action="Add">
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name)
+    <br/>
+    @Html.LabelFor(m => m.Discription)
+    @Html.TextBoxFor(m => m.Discription)
+    <br/>
+    @Html.LabelFor(m => m.MuscleGroup)
+    @Html.TextBoxFor(m => m.MuscleGroup)
+    <br />
+    <button>Add</button>
+</form>
+
+
