@@ -28,11 +28,33 @@ namespace FitnessApp.Repositories
                 {
                     ExerciseId = exercise.ExerciseId,
                     Name = exercise.Name,
-                    Discription = exercise.Discription
+                    Discription = exercise.Discription,
+                    MuscleGroup = exercise.MuscleGroup
                 };
+                exercises.Add(newModel);
             }
             return exercises;
         }
 
+        public async Task AddExercise(ExerciseModel exercise)
+        {
+            var Exercise = new Exercise()
+            {
+                Name = exercise.Name,
+                Discription = exercise.Discription,
+                MuscleGroup = exercise.MuscleGroup
+            };
+
+            context.Exercises.Add(Exercise);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int exerciseId)
+        {
+            var entity = await context.Exercises.SingleAsync(m => m.ExerciseId == exerciseId);
+            context.Exercises.Remove(entity);
+            await context.SaveChangesAsync();
+            
+        }
     }
 }

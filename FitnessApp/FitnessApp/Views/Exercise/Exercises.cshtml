@@ -1,4 +1,19 @@
 ﻿@model List<ExerciseModel>
 
 <h1>Exercises</h1>
+<form>
+    <button asp-controller="Exercise" asp-action="Add">Add Exercise</button>
+</form>
 
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Discription</th>
+            <th>Muscle Group</th>
+        </tr>
+    </thead>
+
+        @Html.DisplayForModel()
+
+</table>

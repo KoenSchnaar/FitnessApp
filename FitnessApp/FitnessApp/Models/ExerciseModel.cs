@@ -10,5 +10,6 @@ namespace FitnessApp.Models
         public int ExerciseId { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
+        public string MuscleGroup { get; set; }
     }
 }
