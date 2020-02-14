@@ -18,11 +18,22 @@
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown1-content">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Exercise" asp-action="Exercises">Exercises</a>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Exercise" asp-action="Add">Add exercise</a>
-                    @*<a href="#">Link 3</a>*@
+                    <a asp-area="" asp-controller="Exercise" asp-action="Exercises">Exercises</a>
+                    <a asp-area="" asp-controller="Exercise" asp-action="Add">Add exercise</a>
                 </div>
             </div>
+            <div class="dropdown1">
+                <button class="dropbtn">
+                    Workout
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown1-content">
+                    <a asp-area="" asp-controller="Exercise" asp-action="Create">Create Workout</a>
+                    <a asp-area="" asp-controller="Exercise" asp-action="Add">Choose workout</a>
+                </div>
+            </div>
+                <partial name="_LoginPartial" />
+
         </div>
 
     </header>

@@ -35,7 +35,12 @@ namespace FitnessApp.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WorkoutId")
+                        .HasColumnType("int");
+
                     b.HasKey("ExerciseId");
+
+                    b.HasIndex("WorkoutId");
 
                     b.ToTable("Exercises");
                 });
@@ -89,6 +94,18 @@ namespace FitnessApp.Data.Migrations
                     b.HasIndex("PerformedExerciseId");
 
                     b.ToTable("RepsOfExercises");
+                });
+
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.Workout", b =>
+                {
+                    b.Property<int>("WorkoutId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("WorkoutId");
+
+                    b.ToTable("Workouts");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.WorkoutForm", b =>
@@ -321,6 +338,13 @@ namespace FitnessApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.Exercise", b =>
+                {
+                    b.HasOne("FitnessApp.DatabaseClasses.Workout", null)
+                        .WithMany("Exercises")
+                        .HasForeignKey("WorkoutId");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.PerformedExercise", b =>

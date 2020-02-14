@@ -18,5 +18,6 @@ namespace FitnessApp.Data
         public DbSet<PerformedExercise> PerformedExercises { get; set; }
         public DbSet<RepsOfExercise> RepsOfExercises { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
     }
 }
