@@ -1,0 +1,18 @@
+﻿@model List<FitnessApp.Models.WorkoutModel>
+@{
+    ViewData["Title"] = "ShowWorkouts";
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Muscle Group</th>
+            <th>View</th>
+        </tr>
+    </thead>
+
+    @Html.DisplayForModel()
+
+</table>
+

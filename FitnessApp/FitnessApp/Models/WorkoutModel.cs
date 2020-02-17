@@ -8,6 +8,8 @@ namespace FitnessApp.Models
     public class WorkoutModel
     {
         public int WorkoutModelId { get; set; }
+        public string Name { get; set; }
+        public string MuscleGroup { get; set; }
         public List<ExerciseModel> Exercises { get; set; }
 
     }

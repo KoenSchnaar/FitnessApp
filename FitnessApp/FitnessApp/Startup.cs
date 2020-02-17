@@ -32,6 +32,7 @@ namespace FitnessApp
             services.AddScoped<IPerformedExerciseRepository, PerformedExerciseRepository>();
             services.AddScoped<IRepsOfExerciseRepository, RepsOfExerciseRepository>();
             services.AddScoped<IWorkoutFormRepository, WorkoutFormRepository>();
+            services.AddScoped<IWorkoutRepository, WorkoutRepository>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

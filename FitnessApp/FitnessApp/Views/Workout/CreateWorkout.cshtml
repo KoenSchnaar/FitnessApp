@@ -1,0 +1,21 @@
+﻿@model List<FitnessApp.Models.ExerciseModel>
+@{
+    ViewData["Title"] = "CreateWorkout";
+}
+
+<h1>CreateWorkout</h1>
+<form method="post" asp-controller="Workout" asp-action="CreateWorkout">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Discription</th>
+                <th>Muscle Group</th>
+            </tr>
+        </thead>
+
+        @Html.EditorForModel()
+
+    </table>
+</form>
