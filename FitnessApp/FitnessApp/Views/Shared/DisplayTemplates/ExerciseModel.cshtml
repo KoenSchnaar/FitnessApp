@@ -1,0 +1,7 @@
+﻿@model FitnessApp.Models.ExerciseModel
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Discription</td>
+    <td>@Model.MuscleGroup</td>
+    <td><a asp-controller="Exercise" asp-action="Delete" asp-route-exerciseId="@Model.ExerciseId">Delete</a></td>
+</tr>

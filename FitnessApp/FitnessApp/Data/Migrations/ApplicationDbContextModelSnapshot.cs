@@ -91,6 +91,18 @@ namespace FitnessApp.Data.Migrations
                     b.ToTable("RepsOfExercises");
                 });
 
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.Workout", b =>
+                {
+                    b.Property<int>("WorkoutId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("WorkoutId");
+
+                    b.ToTable("Workouts");
+                });
+
             modelBuilder.Entity("FitnessApp.DatabaseClasses.WorkoutForm", b =>
                 {
                     b.Property<int>("WorkoutFormId")
@@ -121,6 +133,24 @@ namespace FitnessApp.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("WorkoutForms");
+                });
+
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.WorkoutRef", b =>
+                {
+                    b.Property<int>("WorkoutRefId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WorkoutRefId");
+
+                    b.ToTable("WorkoutRefs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

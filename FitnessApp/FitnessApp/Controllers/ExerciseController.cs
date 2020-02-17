@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FitnessApp.Models;
 using FitnessApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,5 +32,24 @@ namespace FitnessApp.Controllers
             var exercises = await exerciseRepo.GetAllExercises();
             return View(exercises);
         }
+
+        public async Task<IActionResult> Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(ExerciseModel exercise)
+        {
+            await exerciseRepo.AddExercise(exercise);
+            return View();
+        }
+
+        public async Task<IActionResult> Delete(int exerciseId)
+        {
+            await exerciseRepo.Delete(exerciseId);
+            return RedirectToAction("Exercises");
+        }
+
     }
 }
