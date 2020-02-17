@@ -8,5 +8,6 @@ namespace FitnessApp.DatabaseClasses
     public class Workout
     {
         public int WorkoutId { get; set; }
+        public string MuscleGroup { get; set; }
     }
 }
