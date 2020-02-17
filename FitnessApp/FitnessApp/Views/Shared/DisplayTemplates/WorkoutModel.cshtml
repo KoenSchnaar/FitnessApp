@@ -1,0 +1,7 @@
+﻿@model FitnessApp.Models.WorkoutModel
+
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.MuscleGroup</td>
+    <td><a asp-controller="Workout" asp-action="ShowWorkout" asp-route-WorkoutId="@Model.WorkoutModelId">View</a></td>
+</tr>

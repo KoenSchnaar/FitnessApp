@@ -73,5 +73,10 @@ namespace FitnessApp.Repositories
             }
             return workoutModels;
         }
+
+        public async Task<WorkoutModel> GetWorkout(int workoutId)
+        {
+            return null;
+        }
     }
 }

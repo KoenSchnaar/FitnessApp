@@ -8,5 +8,6 @@ namespace FitnessApp.Repositories
     {
         Task AddWorkout(List<ExerciseModel> exercises, int workoutId);
         Task<List<WorkoutModel>> GetWorkouts();
+        Task<WorkoutModel> GetWorkout(int workoutId);
     }
 }
