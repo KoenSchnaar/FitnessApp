@@ -1,0 +1,14 @@
+﻿@model FitnessApp.Models.WorkoutModel
+@{
+    ViewData["Title"] = "ShowWorkout";
+}
+
+<h1>@Model.Name</h1>
+
+<div>@Model.MuscleGroup</div> <br/> <br/>
+@{foreach (var exercise in Model.Exercises) {
+        <div> @exercise.Name   </div> <br/> <br/>
+    } }
+
+
+

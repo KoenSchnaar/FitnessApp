@@ -1,7 +1,7 @@
 ﻿@model FitnessApp.Models.ExerciseModel
 <tr>
     <td>
-        <input type="checkbox" />
+        <input type="checkbox" name="selectedExercises" value="@Model.ExerciseId"/>
     </td>
     <td>@Model.Name</td>
     <td>@Model.Discription</td>
