@@ -51,5 +51,10 @@ namespace FitnessApp.Controllers
             return RedirectToAction("Exercises");
         }
 
+        public async Task<IActionResult> ShowExercise(int exerciseId)
+        {
+            var exercise = await exerciseRepo.GetExercise(exerciseId);
+            return View(exercise);
+        }
     }
 }

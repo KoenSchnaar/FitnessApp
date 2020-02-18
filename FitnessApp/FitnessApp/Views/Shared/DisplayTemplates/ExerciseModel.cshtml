@@ -1,6 +1,6 @@
 ﻿@model FitnessApp.Models.ExerciseModel
 <tr>
-    <td>@Model.Name</td>
+    <td><a class="btn-link text-dark" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@Model.ExerciseId">@Model.Name</a></td>
     <td>@Model.Discription</td>
     <td>@Model.MuscleGroup</td>
     <td><a asp-controller="Exercise" asp-action="Delete" asp-route-exerciseId="@Model.ExerciseId">Delete</a></td>

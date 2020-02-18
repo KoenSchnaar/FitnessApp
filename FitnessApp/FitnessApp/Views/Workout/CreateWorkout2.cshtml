@@ -1,0 +1,29 @@
+﻿@model List<FitnessApp.Models.ExerciseModel>
+@{
+    ViewData["Title"] = "CreateWorkout";
+}
+
+<form method="post">
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Reps</th>
+            <th>Sets</th>
+            <th>Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+            @{ foreach (var exercise in Model)
+                {
+                    <tr>
+                        <td><div>@exercise.Name</div></td>
+                        <td><div>@Html.TextBox("Reps")</div></td>
+                        <td><div>@Html.TextBox("Sets")</div></td>
+                        <td><div>@Html.TextBox("Weight")</div></td>
+                    </tr>
+                }
+            }
+    </tbody>
+</table>
+</form>
