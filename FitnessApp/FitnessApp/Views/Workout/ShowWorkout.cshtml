@@ -6,9 +6,25 @@
 <h1>@Model.Name</h1>
 
 <div>@Model.MuscleGroup</div> <br/> <br/>
-@{foreach (var exercise in Model.Exercises) {
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Discription</th>
+            <th>Muscle Group</th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.DisplayFor(x => x.Exercises)
+    </tbody>
+</table>
+
+
+@*@{foreach (var exercise in Model.Exercises) {
         <div> @exercise.Name   </div> <br/> <br/>
-    } }
+  } 
+  }*@
 
 
 

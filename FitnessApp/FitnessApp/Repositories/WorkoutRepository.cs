@@ -113,12 +113,12 @@ namespace FitnessApp.Repositories
             return workoutMdl;
         }
 
-        public async Task CreateWorkout(List<int> selectedExercises)
+        public async Task CreateWorkout(List<int> selectedExercises, string name, string muscleGroup)
         {
             var workout = new Workout()
             {
-                Name = "test",
-                MuscleGroup = "test",
+                Name = name,
+                MuscleGroup = muscleGroup,
             };
             context.Workouts.Add(workout);
             await context.SaveChangesAsync();

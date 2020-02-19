@@ -29,18 +29,25 @@ namespace FitnessApp.Controllers
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
         }
-        public async Task<IActionResult> CreateWorkout()
+        public async Task<IActionResult> CreateWorkout1()
         {
             var exercises = await exerciseRepo.GetAllExercises();
             return View(exercises);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateWorkout(List<int> selectedExercises)
+        public async Task<IActionResult> CreateWorkout1(List<int> selectedExercises, string name, string muscleGroup)
         {
-            await workoutRepo.CreateWorkout(selectedExercises);
-            return RedirectToAction("ShowWorkouts");
+            await workoutRepo.CreateWorkout(selectedExercises, name, muscleGroup);
+            return RedirectToAction("CreateWorkout2", new { ids = selectedExercises });
         }
+
+        public async Task<IActionResult> CreateWorkout2(List<int> ids)
+        {
+            var exercises = await exerciseRepo.GetExercisesById(ids);
+            return View(exercises);
+        }
+
 
         public async Task<IActionResult> ShowWorkouts()
         {
