@@ -11,6 +11,7 @@ namespace FitnessApp.Models
         public string Name { get; set; }
         public string MuscleGroup { get; set; }
         public List<ExerciseModel> Exercises { get; set; }
+        public int HighestSets { get; set; }
 
     }
 }

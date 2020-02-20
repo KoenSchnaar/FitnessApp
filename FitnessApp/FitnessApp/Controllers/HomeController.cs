@@ -17,12 +17,14 @@ namespace FitnessApp.Controllers
         private readonly IPerformedExerciseRepository performedExerciseRepo;
         private readonly IRepsOfExerciseRepository repsOfExerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
+        private readonly IWorkoutRepository workoutRepo;
 
         public HomeController(ILogger<HomeController> logger, 
             IExerciseRepository ExerciseRepo,
             IPerformedExerciseRepository performedExerciseRepo,
             IRepsOfExerciseRepository repsOfExerciseRepo,
-            IWorkoutFormRepository workoutFormRepo
+            IWorkoutFormRepository workoutFormRepo,
+            IWorkoutRepository workoutRepo
             )
         {
             _logger = logger;
@@ -30,6 +32,7 @@ namespace FitnessApp.Controllers
             this.performedExerciseRepo = performedExerciseRepo;
             this.repsOfExerciseRepo = repsOfExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
+            this.workoutRepo = workoutRepo;
         }
 
         public IActionResult Index()

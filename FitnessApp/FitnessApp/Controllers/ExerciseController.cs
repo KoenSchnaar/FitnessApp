@@ -33,7 +33,7 @@ namespace FitnessApp.Controllers
             return View(exercises);
         }
 
-        public async Task<IActionResult> Add()
+        public ActionResult Add()
         {
             return View();
         }

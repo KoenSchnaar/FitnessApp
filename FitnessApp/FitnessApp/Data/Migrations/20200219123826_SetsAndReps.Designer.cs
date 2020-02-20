@@ -4,14 +4,16 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200219123826_SetsAndReps")]
+    partial class SetsAndReps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,20 +75,9 @@ namespace FitnessApp.Data.Migrations
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Reps")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeightKG")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
                     b.HasKey("ExerciseSetsId");
 
                     b.HasIndex("ExerciseId");
-
-                    b.HasIndex("WorkoutId");
 
                     b.ToTable("ExerciseSets");
                 });
@@ -428,12 +419,6 @@ namespace FitnessApp.Data.Migrations
                     b.HasOne("FitnessApp.DatabaseClasses.Exercise", "Exercise")
                         .WithMany()
                         .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FitnessApp.DatabaseClasses.Workout", "Workout")
-                        .WithMany()
-                        .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
