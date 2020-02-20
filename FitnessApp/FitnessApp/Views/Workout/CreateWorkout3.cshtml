@@ -1,0 +1,36 @@
+﻿@model FitnessApp.Models.WorkoutModel
+@{
+    ViewData["Title"] = "CreateWorkout3";
+}
+
+<h1>Declare your number of reps</h1>
+
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                @for (int i = 1; i < Model.HighestSets + 1; i++)
+                {
+                    <th>Set @i</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Exercises.Count; i++)
+            {
+                <tr>
+                    <td>@Model.Exercises[i].Name</td>
+                    @for (int x = 0; x < Model.Exercises[i].Sets.Count; x++)
+                    {
+                        @Html.HiddenFor(m => m.Exercises[i].ExerciseId)
+                        @Html.HiddenFor(m => m.Exercises[i].Sets[x].ExerciseSetsId)
+                        <td>@Html.TextBoxFor(m => m.Exercises[i].Sets[x].Reps, new { @class = "resizedTextbox" })</td>
+                    }
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <button class="btn-primary btn" asp-controller="Workout" asp-action="CreateWorkout3">Next</button>
+</form>

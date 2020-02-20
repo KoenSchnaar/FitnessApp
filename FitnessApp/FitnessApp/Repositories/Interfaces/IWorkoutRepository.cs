@@ -9,6 +9,8 @@ namespace FitnessApp.Repositories
         Task AddWorkout(List<ExerciseModel> exercises, int workoutId);
         Task<List<WorkoutModel>> GetWorkouts();
         Task<WorkoutModel> GetWorkout(int workoutId);
-        Task CreateWorkout(List<int> selectedExercises, string name, string muscleGroup);
+        Task<int> CreateWorkout(List<int> selectedExercises, string name, string muscleGroup);
+        void CreateNrOfSets(WorkoutModel workout);
+        public void AddReps(WorkoutModel workout);
     }
 }

@@ -1,29 +1,36 @@
-﻿@model List<FitnessApp.Models.ExerciseModel>
+﻿@model FitnessApp.Models.WorkoutModel
 @{
     ViewData["Title"] = "CreateWorkout";
 }
+
+<h1>Declare your number of sets</h1>
 
 <form method="post">
 <table>
     <thead>
         <tr>
             <th>Name</th>
-            <th>Reps</th>
-            <th>Sets</th>
-            <th>Weight</th>
+            <th>Number of sets</th>
+
         </tr>
     </thead>
     <tbody>
-            @{ foreach (var exercise in Model)
-                {
-                    <tr>
-                        <td><div>@exercise.Name</div></td>
-                        <td><div>@Html.TextBox("Reps")</div></td>
-                        <td><div>@Html.TextBox("Sets")</div></td>
-                        <td><div>@Html.TextBox("Weight")</div></td>
-                    </tr>
-                }
-            }
+        @for (int i = 0; i < Model.Exercises.Count(); i++)
+        {
+            <tr>
+                @Html.HiddenFor(m => m.Exercises[i].ExerciseId)
+                @Html.HiddenFor(m => m.Exercises[i].Name)
+                @Html.HiddenFor(m => m.Exercises[i].MuscleGroup)
+                @Html.HiddenFor(m => m.Exercises[i].Discription)
+                @Html.HiddenFor(m => m.Name)
+                @Html.HiddenFor(m => m.MuscleGroup)
+                @Html.HiddenFor(m => m.WorkoutModelId)
+                <td>@Model.Exercises[i].Name</td>
+                <td>@Html.TextBoxFor(m => m.Exercises[i].NrOfSets, new { @class = "resizedTextbox" })</td>
+            </tr>
+        }
+            
     </tbody>
 </table>
+    <button class="btn-primary btn" asp-controller="Workout" asp-action="CreateWorkout2">Next</button>
 </form>

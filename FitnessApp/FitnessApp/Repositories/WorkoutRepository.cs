@@ -76,8 +76,10 @@ namespace FitnessApp.Repositories
 
         public async Task<WorkoutModel> GetWorkout(int workoutId)
         {
+            // get workout entity
             var workout = context.Workouts.Single(w => w.WorkoutId == workoutId);
-
+            
+            // make new workoutmodel
             var workoutMdl = new WorkoutModel()
             {
                 WorkoutModelId = workout.WorkoutId,
@@ -85,6 +87,7 @@ namespace FitnessApp.Repositories
                 MuscleGroup = workout.MuscleGroup
             };
 
+            // get exercises in selected workout
             var workoutRefs = await context.WorkoutRefs.Where(m => m.WorkoutId == workout.WorkoutId).ToListAsync();
             var exercises = new List<Exercise>();
 
@@ -94,8 +97,9 @@ namespace FitnessApp.Repositories
                 exercises.Add(exercise);
             }
 
+            // make exercise models for the workout model
             var exerciseModels = new List<ExerciseModel>();
-
+            var highestNrOfSets = 0;
             foreach (var exercise in exercises)
             {
                 var exerciseModel = new ExerciseModel()
@@ -105,15 +109,38 @@ namespace FitnessApp.Repositories
                     Discription = exercise.Discription,
                     MuscleGroup = exercise.MuscleGroup
                 };
+                
+                // gets the sets for each exercise
+                var exerciseSets = await context.ExerciseSets.Where(e => e.WorkoutId == workoutId && e.ExerciseId == exercise.ExerciseId).ToListAsync();
+                if (exerciseSets != null)
+                {
+                    var setModels = new List<SetModel>();
+
+                    foreach (var set in exerciseSets)
+                    {
+                            var setModel = new SetModel()
+                            {
+                                ExerciseSetsId = set.ExerciseSetsId,
+                                Reps = set.Reps,
+                                WeightKg = set.WeightKG
+                            };
+                        setModels.Add(setModel);
+                    }
+                    exerciseModel.Sets = setModels;
+                    if (setModels.Count() > highestNrOfSets)
+                    {
+                        highestNrOfSets = setModels.Count();
+                    }
+                }
                 exerciseModels.Add(exerciseModel);
             }
-
+            workoutMdl.HighestSets = highestNrOfSets;
             workoutMdl.Exercises = exerciseModels;
 
             return workoutMdl;
         }
 
-        public async Task CreateWorkout(List<int> selectedExercises, string name, string muscleGroup)
+        public async Task<int> CreateWorkout(List<int> selectedExercises, string name, string muscleGroup)
         {
             var workout = new Workout()
             {
@@ -136,6 +163,41 @@ namespace FitnessApp.Repositories
             }
 
             await context.SaveChangesAsync();
+            return workout.WorkoutId;
+        }
+
+        public void CreateNrOfSets(WorkoutModel workout)
+        {
+            foreach (var exercise in workout.Exercises)
+            {
+                var nrOfSets = exercise.NrOfSets;
+
+                for (int x = 0; x < nrOfSets; x++)
+                {
+                    var newSet = new ExerciseSets()
+                    {
+                        ExerciseId = exercise.ExerciseId,
+                        WorkoutId = workout.WorkoutModelId,
+                        Reps = 0,
+                        WeightKG = 0
+                    };
+                    context.ExerciseSets.Add(newSet);
+                }
+                context.SaveChanges();
+            }
+        }
+
+        public void AddReps(WorkoutModel workout)
+        {
+            foreach (var exercise in workout.Exercises)
+            {
+                foreach (var set in exercise.Sets)
+                {
+                    var exerciseSet = context.ExerciseSets.Single(e => e.ExerciseSetsId == set.ExerciseSetsId);
+                    exerciseSet.Reps = set.Reps;
+                }
+            }
+            context.SaveChanges();
         }
     }
 }

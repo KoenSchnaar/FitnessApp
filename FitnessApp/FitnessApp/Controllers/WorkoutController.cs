@@ -38,14 +38,40 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWorkout1(List<int> selectedExercises, string name, string muscleGroup)
         {
-            await workoutRepo.CreateWorkout(selectedExercises, name, muscleGroup);
-            return RedirectToAction("CreateWorkout2", new { ids = selectedExercises });
+            var workoutID = await workoutRepo.CreateWorkout(selectedExercises, name, muscleGroup);
+            return RedirectToAction("CreateWorkout2", new { workoutId = workoutID });
         }
 
-        public async Task<IActionResult> CreateWorkout2(List<int> ids)
+        public async Task<IActionResult> CreateWorkout2(int workoutId)
         {
-            var exercises = await exerciseRepo.GetExercisesById(ids);
+            var exercises = await workoutRepo.GetWorkout(workoutId);
             return View(exercises);
+        }
+
+        [HttpPost]
+        public ActionResult CreateWorkout2(WorkoutModel workout)
+        {
+            workoutRepo.CreateNrOfSets(workout);
+            return RedirectToAction("CreateWorkout3", new { workoutId = workout.WorkoutModelId });
+        }
+
+        public async Task<IActionResult> CreateWorkout3(int workoutId)
+        {
+            var workout = await workoutRepo.GetWorkout(workoutId);
+            return View(workout);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateWorkout3(WorkoutModel workout)
+        {
+            workoutRepo.AddReps(workout);
+            return RedirectToAction("CreateWorkout4", new { workoutId = workout.WorkoutModelId });
+        }
+
+        public async Task<IActionResult> CreateWorkout4(int workoutId)
+        {
+            var workout = await workoutRepo.GetWorkout(workoutId);
+            return View(workout);
         }
 
 
