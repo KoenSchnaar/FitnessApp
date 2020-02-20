@@ -1,7 +1,8 @@
 ﻿@model FitnessApp.Models.WorkoutModel
 
-<tr>
-    <td>@Model.Name</td>
-    <td>@Model.MuscleGroup</td>
-    <td><a asp-controller="Workout" asp-action="ShowWorkout" asp-route-WorkoutId="@Model.WorkoutModelId">View</a></td>
-</tr>
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.MuscleGroup</td>
+        <td><a asp-controller="Workout" asp-action="ShowWorkout" asp-route-WorkoutId="@Model.WorkoutModelId">View</a></td>
+        <td><a asp-controller="Workout" asp-action="DeleteWorkout" asp-route-workoutId="@Model.WorkoutModelId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a></td>
+    </tr>
