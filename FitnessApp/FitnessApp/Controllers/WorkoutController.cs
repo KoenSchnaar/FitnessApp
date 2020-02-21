@@ -98,5 +98,12 @@ namespace FitnessApp.Controllers
             await workoutRepo.DeleteExercise(workoutID, exerciseId);
             return RedirectToAction("ShowWorkout", new { workoutId = workoutID });
         }
+
+        public async Task<IActionResult> UseWorkout(int workoutId)
+        {
+            var workout = await workoutRepo.GetWorkout(workoutId);
+            var newWorkoutForm = await workoutFormRepo.CreateWorkoutForm(workout);
+            return View(newWorkoutForm);
+        }
     }
 }

@@ -1,0 +1,34 @@
+﻿@model FitnessApp.Models.WorkoutFormModel
+@{
+    ViewData["Title"] = "UseWorkout";
+}
+
+<h1>Fill in your sets</h1>
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>Exercise</th>
+                @for (int i = 1; i < @Model.HighestSets + 1; i++)
+                {
+                    <th>set @i reps</th>
+                    <th>set @i weight</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int x = 0; x < @Model.PerformedExercises.Count(); x++)
+            {
+                <tr>
+                    <td>@Model.PerformedExercises[x].Name</td>
+                    @for (int y = 0; y < @Model.PerformedExercises[x].Sets; y++)
+                    {
+                        <td> @Html.TextBox("iets", new { @class = "resizedTextbox form-control" }) </td>
+                        <td> @Html.TextBox("iets", new { @class = "resizedTextbox form-control" }) </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+

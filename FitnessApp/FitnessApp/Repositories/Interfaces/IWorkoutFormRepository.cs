@@ -7,5 +7,6 @@ namespace FitnessApp.Repositories
     public interface IWorkoutFormRepository
     {
         Task<List<WorkoutFormModel>> GetForms();
+        Task<WorkoutFormModel> CreateWorkoutForm(WorkoutModel workout);
     }
 }
