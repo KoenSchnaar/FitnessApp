@@ -5,14 +5,21 @@
 
 <h1>Fill in your sets</h1>
 <form method="post">
-    <table>
+    <table class="table-content SetsWeight">
         <thead>
+            <tr>
+                <th></th>
+                @for (int i = 1; i < @Model.HighestSets + 1; i++)
+                {
+                    <th colspan="2">set @i</th>
+                }
+            </tr>
             <tr>
                 <th>Exercise</th>
                 @for (int i = 1; i < @Model.HighestSets + 1; i++)
                 {
-                    <th>set @i reps</th>
-                    <th>set @i weight</th>
+                    <th>reps</th>
+                    <th>weight</th>
                 }
             </tr>
         </thead>
@@ -26,8 +33,8 @@
                     <td>@Model.PerformedExercises[x].Name</td>
                     @for (int y = 0; y < @Model.PerformedExercises[x].NumberOfSets; y++)
                     {
-                        <td> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].Reps, new { @class = "resizedTextbox form-control" }) </td>
-                        <td> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control" }) </td>
+                        <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].Reps, new { @class = "resizedTextbox form-control" }) </td>
+                        <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control" }) </td>
                     }
                 </tr>
             }
@@ -35,4 +42,3 @@
     </table>
     <button class="btn-primary btn" asp-controller="Workout" asp-action="UseWorkout">Next</button>
 </form>
-
