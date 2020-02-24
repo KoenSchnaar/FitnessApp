@@ -162,6 +162,13 @@ th {
     padding-right: 15px;
     border-bottom: 1px solid #ddd;
     border-bottom-style: double;
+    background-color: #00d478;
+    color: white;
+}
+
+thead {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 tr:hover {
@@ -278,7 +285,22 @@ body, html {
     }
 }
 
+/* Textboxes */
 .resizedTextbox {
     width: 50px;
     height: 20px
 }
+
+.resizedTextbox2 {
+    width: 40%;
+    height: 25px;
+}
+
+#bg {
+    position: fixed;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 25%;
+}
+

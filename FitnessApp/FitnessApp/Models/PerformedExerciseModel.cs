@@ -11,7 +11,7 @@ namespace FitnessApp.Models
         public int ExerciseId { get; set; }
         public int WorkoutFormId { get; set; }
         public string Name { get; set; }
-        public int Sets { get; set; }
-        public List<RepsOfExerciseModel> Reps { get; set; }
+        public int NumberOfSets { get; set; }
+        public List<SetsOfExerciseModel> Sets { get; set; }
     }
 }

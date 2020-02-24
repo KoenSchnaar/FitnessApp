@@ -12,5 +12,7 @@ namespace FitnessApp.Repositories
         Task<int> CreateWorkout(List<int> selectedExercises, string name, string muscleGroup);
         void CreateNrOfSets(WorkoutModel workout);
         public void AddReps(WorkoutModel workout);
+        Task DeleteWorkout(int workoutId);
+        Task DeleteExercise(int workoutId, int exerciseId);
     }
 }

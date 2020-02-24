@@ -16,11 +16,10 @@ namespace FitnessApp.Data
 
         public DbSet<WorkoutForm> WorkoutForms { get; set; }
         public DbSet<PerformedExercise> PerformedExercises { get; set; }
-        public DbSet<RepsOfExercise> RepsOfExercises { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<WorkoutRef> WorkoutRefs { get; set; }
         public DbSet<ExerciseSets> ExerciseSets { get; set; }
-        public DbSet<ExerciseReps> ExerciseReps { get; set; }
+        public DbSet<PerformedSet> PerformedSets { get; set; }
     }
 }

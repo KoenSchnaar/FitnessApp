@@ -10,21 +10,27 @@
 <table>
     <thead>
         <tr>
+            <th></th>
             <th>Name</th>
-            <th>Discription</th>
-            <th>Muscle Group</th>
+            <th>#Sets</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @Html.DisplayFor(x => x.Exercises)
+        @foreach (var exercise in Model.Exercises)
+        {
+            var path = $@"..\..\Images\ExercisePictures\{exercise.ExerciseId}.jpg";
+        <tr>
+            <td> <img src="@path" style=" height: 56px; width: 100px " /></td>
+            <td><a class="btn-link text-dark" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@exercise.ExerciseId">@exercise.Name</a></td>
+            <td>@exercise.Sets.Count()</td>
+            <td><a asp-controller="Workout" asp-action="Edit" asp-route-exerciseId="@exercise.ExerciseId"><img src="..\..\Images\EditIcon.png" width="25" height="25" /></a></td>
+            <td><a asp-controller="Workout" asp-action="DeleteExercise" asp-route-exerciseId="@exercise.ExerciseId" asp-route-workoutID="@Model.WorkoutModelId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a></td>
+        </tr>
+        }
     </tbody>
 </table>
-
-
-@*@{foreach (var exercise in Model.Exercises) {
-        <div> @exercise.Name   </div> <br/> <br/>
-  } 
-  }*@
 
 
 

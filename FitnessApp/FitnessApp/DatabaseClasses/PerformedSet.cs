@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DatabaseClasses
 {
-    public class RepsOfExercise
+    public class PerformedSet
     {
-        public int RepsOfExerciseId { get; set; }
-        public PerformedExercise Exercise { get; set; }
+        public int PerformedSetId { get; set; }
         public int PerformedExerciseId { get; set; }
+        public PerformedExercise PerformedExercise { get; set; }
         public int Reps { get; set; }
         public int WeightKG { get; set; }
-        public double WeightLBS { get { return WeightKG * 2.20462262; } }
     }
 }

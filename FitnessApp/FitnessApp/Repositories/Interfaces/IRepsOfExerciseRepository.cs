@@ -6,6 +6,6 @@ namespace FitnessApp.Repositories
 {
     public interface IRepsOfExerciseRepository
     {
-        Task<List<RepsOfExerciseModel>> GetReps();
+        Task<List<SetsOfExerciseModel>> GetReps();
     }
 }

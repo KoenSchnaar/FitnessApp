@@ -199,5 +199,25 @@ namespace FitnessApp.Repositories
             }
             context.SaveChanges();
         }
+
+        public async Task DeleteWorkout(int workoutId)
+        {
+            var entity = await context.Workouts.SingleOrDefaultAsync(w => w.WorkoutId == workoutId);
+            if (entity != null)
+            {
+                context.Workouts.Remove(entity);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteExercise(int workoutId, int exerciseId)
+        {
+            var entity = await context.WorkoutRefs.SingleOrDefaultAsync(w => w.WorkoutId == workoutId && w.ExerciseId == exerciseId);
+            if (entity != null)
+            {
+                context.WorkoutRefs.Remove(entity);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

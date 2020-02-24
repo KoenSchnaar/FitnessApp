@@ -24,8 +24,9 @@
                     @for (int x = 0; x < Model.Exercises[i].Sets.Count; x++)
                     {
                         @Html.HiddenFor(m => m.Exercises[i].ExerciseId)
+                        @Html.HiddenFor(m => m.WorkoutModelId)
                         @Html.HiddenFor(m => m.Exercises[i].Sets[x].ExerciseSetsId)
-                        <td>@Html.TextBoxFor(m => m.Exercises[i].Sets[x].Reps, new { @class = "resizedTextbox" })</td>
+                        <td>@Html.TextBoxFor(m => m.Exercises[i].Sets[x].Reps, new { @class = "resizedTextbox form-control" })</td>
                     }
                 </tr>
             }
