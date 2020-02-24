@@ -40,29 +40,6 @@ namespace FitnessApp.Data.Migrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("FitnessApp.DatabaseClasses.ExerciseReps", b =>
-                {
-                    b.Property<int>("ExerciseRepsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ExerciseSetsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Reps")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeightKG")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExerciseRepsId");
-
-                    b.HasIndex("ExerciseSetsId");
-
-                    b.ToTable("ExerciseReps");
-                });
-
             modelBuilder.Entity("FitnessApp.DatabaseClasses.ExerciseSets", b =>
                 {
                     b.Property<int>("ExerciseSetsId")
@@ -104,7 +81,7 @@ namespace FitnessApp.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Sets")
+                    b.Property<int>("NumberOfSets")
                         .HasColumnType("int");
 
                     b.Property<int>("WorkoutFormId")
@@ -119,9 +96,9 @@ namespace FitnessApp.Data.Migrations
                     b.ToTable("PerformedExercises");
                 });
 
-            modelBuilder.Entity("FitnessApp.DatabaseClasses.RepsOfExercise", b =>
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.PerformedSet", b =>
                 {
-                    b.Property<int>("RepsOfExerciseId")
+                    b.Property<int>("PerformedSetId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -135,11 +112,11 @@ namespace FitnessApp.Data.Migrations
                     b.Property<int>("WeightKG")
                         .HasColumnType("int");
 
-                    b.HasKey("RepsOfExerciseId");
+                    b.HasKey("PerformedSetId");
 
                     b.HasIndex("PerformedExerciseId");
 
-                    b.ToTable("RepsOfExercises");
+                    b.ToTable("PerformedSets");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.Workout", b =>
@@ -182,12 +159,17 @@ namespace FitnessApp.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("WorkoutFormId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("WorkoutId");
 
                     b.ToTable("WorkoutForms");
                 });
@@ -414,15 +396,6 @@ namespace FitnessApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FitnessApp.DatabaseClasses.ExerciseReps", b =>
-                {
-                    b.HasOne("FitnessApp.DatabaseClasses.ExerciseSets", "ExerciseSets")
-                        .WithMany()
-                        .HasForeignKey("ExerciseSetsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FitnessApp.DatabaseClasses.ExerciseSets", b =>
                 {
                     b.HasOne("FitnessApp.DatabaseClasses.Exercise", "Exercise")
@@ -453,10 +426,10 @@ namespace FitnessApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FitnessApp.DatabaseClasses.RepsOfExercise", b =>
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.PerformedSet", b =>
                 {
-                    b.HasOne("FitnessApp.DatabaseClasses.PerformedExercise", "Exercise")
-                        .WithMany("Reps")
+                    b.HasOne("FitnessApp.DatabaseClasses.PerformedExercise", "PerformedExercise")
+                        .WithMany("Sets")
                         .HasForeignKey("PerformedExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -467,6 +440,12 @@ namespace FitnessApp.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.HasOne("FitnessApp.DatabaseClasses.Workout", "Workout")
+                        .WithMany()
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.WorkoutRef", b =>

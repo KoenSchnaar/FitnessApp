@@ -1,5 +1,7 @@
 ﻿using FitnessApp.Data;
+using FitnessApp.DatabaseClasses;
 using FitnessApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace FitnessApp.Repositories
             return null;
         }
 
-        public async Task<WorkoutFormModel> CreateWorkoutForm(WorkoutModel workout)
+        public WorkoutFormModel CreateWorkoutFormModel(WorkoutModel workout)
         {
             var workoutForm = new WorkoutFormModel
             {
@@ -39,7 +41,7 @@ namespace FitnessApp.Repositories
                 {
                     ExerciseId = exercise.ExerciseId,
                     Name = exercise.Name,
-                    Sets = exercise.Sets.Count()
+                    NumberOfSets = exercise.Sets.Count()
                 };
                 exercises.Add(PerformedExercise);
             }
@@ -47,6 +49,57 @@ namespace FitnessApp.Repositories
             workoutForm.PerformedExercises = exercises;
 
             return workoutForm;
+        }
+
+        public async Task CreateTotalWorkout(WorkoutFormModel workoutForm)
+        {
+            var workout = await CreateWorkoutForm(workoutForm);
+
+            foreach(var exercise in workoutForm.PerformedExercises)
+            {
+                var performedExercise = await CreatePerformedExercise(exercise, workout.WorkoutFormId);
+
+                foreach (var set in exercise.Sets)
+                {
+                    var performedSet = new PerformedSet()
+                    {
+                        PerformedExerciseId = performedExercise.PerformedExerciseId,
+                        Reps = set.Reps,
+                        WeightKG = set.WeightKG
+                    };
+                    context.PerformedSets.Add(performedSet);
+                }
+            }
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<WorkoutForm> CreateWorkoutForm(WorkoutFormModel workoutForm)
+        {
+            var workout = new WorkoutForm()
+            {
+                WorkoutId = workoutForm.workoutId,
+                Day = DateTime.Now.Day,
+                Month = DateTime.Now.Month,
+                Year = DateTime.Now.Year
+            };
+            context.WorkoutForms.Add(workout);
+            await context.SaveChangesAsync();
+            return workout;
+        }
+
+        public async Task<PerformedExercise> CreatePerformedExercise(PerformedExerciseModel exercise, int workoutFormId)
+        {
+            var performedExercise = new PerformedExercise()
+            {
+                ExerciseId = exercise.ExerciseId,
+                WorkoutFormId = workoutFormId,
+                Name = exercise.Name,
+                NumberOfSets = exercise.Sets.Count()
+            };
+            context.PerformedExercises.Add(performedExercise);
+            await context.SaveChangesAsync();
+
+            return performedExercise;
         }
     }
 }

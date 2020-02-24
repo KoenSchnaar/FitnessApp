@@ -16,7 +16,7 @@ namespace FitnessApp.Repositories
             this.context = context;
         }
 
-        public async Task<List<RepsOfExerciseModel>> GetReps()
+        public async Task<List<SetsOfExerciseModel>> GetReps()
         {
             return null;
         }

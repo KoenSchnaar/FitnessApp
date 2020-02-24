@@ -13,7 +13,7 @@ namespace FitnessApp.DatabaseClasses
         public WorkoutForm WorkoutForm { get; set; }
         public int WorkoutFormId { get; set; }
         public string Name { get; set; }
-        public int Sets { get; set; }
-        public List<RepsOfExercise> Reps { get; set; }
+        public int NumberOfSets { get; set; }
+        public List<PerformedSet> Sets { get; set; }
     }
 }

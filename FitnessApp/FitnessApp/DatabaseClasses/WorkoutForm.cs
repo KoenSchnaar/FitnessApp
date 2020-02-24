@@ -9,6 +9,8 @@ namespace FitnessApp.DatabaseClasses
     public class WorkoutForm
     {
         public int WorkoutFormId { get; set; }
+        public int WorkoutId { get; set; }
+        public Workout Workout { get; set; }
         public IdentityUser User { get; set; }
         public string UserId { get; set; }
         public List<PerformedExercise> PerformedExercises { get; set; }

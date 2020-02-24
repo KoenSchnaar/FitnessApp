@@ -17,18 +17,22 @@
             </tr>
         </thead>
         <tbody>
+            @Html.HiddenFor(m => m.workoutId)
             @for (int x = 0; x < @Model.PerformedExercises.Count(); x++)
             {
+                @Html.HiddenFor(m => m.PerformedExercises[x].ExerciseId)
+                @Html.HiddenFor(m => m.PerformedExercises[x].Name)
                 <tr>
                     <td>@Model.PerformedExercises[x].Name</td>
-                    @for (int y = 0; y < @Model.PerformedExercises[x].Sets; y++)
+                    @for (int y = 0; y < @Model.PerformedExercises[x].NumberOfSets; y++)
                     {
-                        <td> @Html.TextBox("iets", new { @class = "resizedTextbox form-control" }) </td>
-                        <td> @Html.TextBox("iets", new { @class = "resizedTextbox form-control" }) </td>
+                        <td> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].Reps, new { @class = "resizedTextbox form-control" }) </td>
+                        <td> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control" }) </td>
                     }
                 </tr>
             }
         </tbody>
     </table>
+    <button class="btn-primary btn" asp-controller="Workout" asp-action="UseWorkout">Next</button>
 </form>
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Models
 {
-    public class RepsOfExerciseModel
+    public class SetsOfExerciseModel
     {
         public int RepsOfExerciseId { get; set; }
         public int PerformedExerciseId { get; set; }
