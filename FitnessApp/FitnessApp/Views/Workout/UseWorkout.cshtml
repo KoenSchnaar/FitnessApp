@@ -34,7 +34,7 @@
                     @for (int y = 0; y < @Model.PerformedExercises[x].NumberOfSets; y++)
                     {
                         <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].Reps, new { @class = "resizedTextbox form-control" }) </td>
-                        <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control" }) </td>
+                        <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control", placeholder = "kg" }) </td>
                     }
                 </tr>
             }
