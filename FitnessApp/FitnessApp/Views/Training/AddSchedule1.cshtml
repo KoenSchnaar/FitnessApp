@@ -1,0 +1,10 @@
+﻿@model FitnessApp.Models.TrainingModel
+
+<h1>Select your number of training days</h1>
+
+<form method="post">
+    <input type="text" placeholder="Name" class="form-control resizedTextbox2" name="Name" style="margin-bottom: 5px" />
+    <input name="NrOfTrainingDays" type="number" />
+    <br />
+    <button class="btn-primary btn" asp-controller="Training" asp-action="AddSchedule1">Next</button>
+</form>

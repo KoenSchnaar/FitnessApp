@@ -15,6 +15,9 @@ namespace FitnessApp.Repositories
             this.context = context;
         }
 
+        public async Task AddSchedule()
+        {
 
+        }
     }
 }

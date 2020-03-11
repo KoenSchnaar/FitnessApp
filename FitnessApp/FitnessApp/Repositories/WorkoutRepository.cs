@@ -74,6 +74,56 @@ namespace FitnessApp.Repositories
             return workoutModels;
         }
 
+        public async Task<List<WorkoutModel>> GetWorkoutsById(List<int> workoutIds)
+        {
+            var workouts = new List<Workout>();
+
+            foreach (var id in workoutIds)
+            {
+                var workout = await context.Workouts.SingleAsync(w => w.WorkoutId == id);
+                workouts.Add(workout);
+            }
+
+            var workoutModels = new List<WorkoutModel>();
+
+            foreach (var workout in workouts)
+            {
+                var workoutMdl = new WorkoutModel()
+                {
+                    WorkoutModelId = workout.WorkoutId,
+                    Name = workout.Name,
+                    MuscleGroup = workout.MuscleGroup
+                };
+
+                var workoutRefs = await context.WorkoutRefs.Where(m => m.WorkoutId == workout.WorkoutId).ToListAsync();
+                var exercises = new List<Exercise>();
+
+                foreach (var workoutRef in workoutRefs)
+                {
+                    var exercise = await context.Exercises.SingleAsync(m => m.ExerciseId == workoutRef.ExerciseId);
+                    exercises.Add(exercise);
+                }
+
+                var exerciseModels = new List<ExerciseModel>();
+
+                foreach (var exercise in exercises)
+                {
+                    var exerciseModel = new ExerciseModel()
+                    {
+                        ExerciseId = exercise.ExerciseId,
+                        Name = exercise.Name,
+                        Discription = exercise.Discription,
+                        MuscleGroup = exercise.MuscleGroup
+                    };
+                    exerciseModels.Add(exerciseModel);
+                }
+
+                workoutMdl.Exercises = exerciseModels;
+                workoutModels.Add(workoutMdl);
+            }
+            return workoutModels;
+        }
+
         public async Task<WorkoutModel> GetWorkout(int workoutId)
         {
             // get workout entity

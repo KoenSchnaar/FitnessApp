@@ -1,0 +1,19 @@
+﻿@model List<FitnessApp.Models.WorkoutModel>
+
+<h1>Choose workouts</h1>
+
+<form method="post">
+    <table class="table-content">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Workout</th>
+                <th>Muscle group</th>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.EditorForModel()
+        </tbody>
+    </table>
+    <button class="btn-primary btn" asp-controller="training" asp-action="AddSchedule2">Next</button>
+</form>
