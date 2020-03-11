@@ -1,4 +1,7 @@
 ﻿using FitnessApp.Data;
+using FitnessApp.DatabaseClasses;
+using FitnessApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Repositories
 {
-    public class TrainingRepository
+    public class TrainingRepository : ITrainingRepository
     {
         private readonly ApplicationDbContext context;
 
@@ -15,9 +18,61 @@ namespace FitnessApp.Repositories
             this.context = context;
         }
 
-        public async Task AddSchedule()
+        public async Task<TrainingSchedule> CreateSchedule(int days, string name)
         {
+            TrainingSchedule training = new TrainingSchedule();
+            training.Name = name;
+            training.Days = days;
 
+            context.trainingSchedules.Add(training);
+            await context.SaveChangesAsync();
+
+            return training;
+        }
+
+        public async Task<int> AddSchedule(List<WorkoutModel> workouts, int days, string name)
+        {
+            var training = await CreateSchedule(days, name);
+
+            foreach(var workout in workouts)
+            {
+                TrainingScheduleRef scheduleRef = new TrainingScheduleRef();
+                scheduleRef.TrainingScheduleId = training.TrainingScheduleId;
+                scheduleRef.WorkoutId = workout.WorkoutModelId;
+                context.trainingScheduleRefs.Add(scheduleRef);
+            }
+            await context.SaveChangesAsync();
+
+            return training.TrainingScheduleId;
+        }
+
+        public async Task<List<int>> GetWorkoutsIdsFromTraining(int trainingId)
+        {
+            var ints = new List<int>();
+            var workouts = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == trainingId).ToListAsync();
+
+            foreach (var workout in workouts)
+            {
+                var id = workout.WorkoutId;
+                ints.Add(id);
+            }
+
+            return ints;
+        }
+
+        public async Task<TrainingModel> GetTraining(int trainingSceduleId, List<WorkoutModel> workoutMdls)
+        {
+            var training = await context.trainingSchedules.SingleAsync(m => m.TrainingScheduleId == trainingSceduleId);
+            var workouts = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == trainingSceduleId).ToListAsync();
+
+            var trainingMdl = new TrainingModel
+            {
+                TrainingModelId = training.TrainingScheduleId,
+                Name = training.Name,
+                Workouts = workoutMdls
+            };
+
+            return trainingMdl;
         }
     }
 }

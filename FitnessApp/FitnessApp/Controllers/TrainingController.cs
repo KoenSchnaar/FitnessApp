@@ -15,12 +15,14 @@ namespace FitnessApp.Controllers
         private readonly IRepsOfExerciseRepository repsOfExerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
         private readonly IWorkoutRepository workoutRepo;
+        private readonly ITrainingRepository trainingRepo;
 
         public TrainingController(IExerciseRepository ExerciseRepo,
             IPerformedExerciseRepository performedExerciseRepo,
             IRepsOfExerciseRepository repsOfExerciseRepo,
             IWorkoutFormRepository workoutFormRepo,
-            IWorkoutRepository workoutRepo
+            IWorkoutRepository workoutRepo,
+            ITrainingRepository trainingRepo
             )
         {
             exerciseRepo = ExerciseRepo;
@@ -28,6 +30,7 @@ namespace FitnessApp.Controllers
             this.repsOfExerciseRepo = repsOfExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
+            this.trainingRepo = trainingRepo;
         }
 
         public async Task<IActionResult> ShowSchedules()
@@ -46,23 +49,27 @@ namespace FitnessApp.Controllers
             return RedirectToAction("AddSchedule2", training);
         }
 
-        public async Task<IActionResult> AddSchedule2(TrainingModel test)
+        public async Task<IActionResult> AddSchedule2(TrainingModel training)
         {
-            //ViewBag.Training = training;
+            ViewBag.Training = training;
             var workouts = await workoutRepo.GetWorkouts();
             return View(workouts);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSchedule2(List<int> selectedExercises, TrainingModel training)
+        public async Task<IActionResult> AddSchedule2(List<int> selectedWorkouts, int days, string name)
         {
-            return RedirectToAction("AddSchedule3", new { workoutIds = selectedExercises });
+            var workouts = await workoutRepo.GetWorkoutsByIds(selectedWorkouts);
+            var trainingScheduleId = await trainingRepo.AddSchedule(workouts, days, name);
+            return RedirectToAction("AddSchedule3", new { trainingId = trainingScheduleId});
         }
 
-        public async Task<IActionResult> AddSchedule3(List<int> workoutIds)
+        public async Task<IActionResult> AddSchedule3(int trainingId)
         {
-            var workouts = await workoutRepo.GetWorkoutsById(workoutIds);
-            return View(workouts);
+            var ids = await trainingRepo.GetWorkoutsIdsFromTraining(trainingId);
+            var workouts = await workoutRepo.GetWorkoutsByIds(ids);
+            var trainingSchedule = await trainingRepo.GetTraining(trainingId, workouts);
+            return View(trainingSchedule);
         }
     }
 }

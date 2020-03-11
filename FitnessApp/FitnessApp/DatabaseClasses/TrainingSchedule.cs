@@ -9,5 +9,6 @@ namespace FitnessApp.DatabaseClasses
     {
         public int TrainingScheduleId { get; set; }
         public string Name { get; set; }
+        public int Days { get; set; }
     }
 }

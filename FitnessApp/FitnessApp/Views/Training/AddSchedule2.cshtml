@@ -1,8 +1,12 @@
 ﻿@model List<FitnessApp.Models.WorkoutModel>
 
+@{ 
+    TrainingModel training = ViewBag.Training;
+}
+
 <h1>Choose workouts</h1>
 
-<form method="post">
+<form method="post" asp-controller="training" asp-action="AddSchedule2">
     <table class="table-content">
         <thead>
             <tr>
@@ -15,5 +19,5 @@
             @Html.EditorForModel()
         </tbody>
     </table>
-    <button class="btn-primary btn" asp-controller="training" asp-action="AddSchedule2">Next</button>
+    <button class="btn-primary btn" asp-controller="training" asp-action="AddSchedule2" asp-route-days="@training.NrOfTrainingDays" asp-route-name="@training.Name">Next</button>
 </form>
