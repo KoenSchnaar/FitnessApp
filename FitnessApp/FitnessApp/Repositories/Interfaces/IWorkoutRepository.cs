@@ -15,5 +15,6 @@ namespace FitnessApp.Repositories
         public void AddReps(WorkoutModel workout);
         Task DeleteWorkout(int workoutId);
         Task DeleteExercise(int workoutId, int exerciseId);
+        //Task<List<TrainingModel>> AddWorkoutsToSchedules(List<TrainingModel> trainingModels);
     }
 }

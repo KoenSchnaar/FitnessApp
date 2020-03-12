@@ -60,19 +60,49 @@ namespace FitnessApp.Repositories
             return ints;
         }
 
-        public async Task<TrainingModel> GetTraining(int trainingSceduleId, List<WorkoutModel> workoutMdls)
+        public async Task<TrainingModel> GetScheduleById(int trainingSceduleId, List<WorkoutModel> workoutMdls)
         {
             var training = await context.trainingSchedules.SingleAsync(m => m.TrainingScheduleId == trainingSceduleId);
-            var workouts = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == trainingSceduleId).ToListAsync();
+            //var workouts = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == trainingSceduleId).ToListAsync();
 
             var trainingMdl = new TrainingModel
             {
                 TrainingModelId = training.TrainingScheduleId,
                 Name = training.Name,
+                NrOfTrainingDays = training.Days,
                 Workouts = workoutMdls
             };
 
             return trainingMdl;
+        }
+
+
+        public async Task<List<TrainingModel>> GetAllSchedules()
+        {
+            var schedules = new List<TrainingModel>();
+            var scheduleEntities = await context.trainingSchedules.ToListAsync();
+            
+            foreach(var entity in scheduleEntities)
+            {
+                var trainingMdl = new TrainingModel
+                {
+                    TrainingModelId = entity.TrainingScheduleId,
+                    Name = entity.Name,
+                    NrOfTrainingDays = entity.Days,
+                    Workouts = new List<WorkoutModel>()
+                };
+                var refs = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == entity.TrainingScheduleId).ToListAsync();
+                foreach(var trainingRef in refs)
+                {
+                    var workoutMdl = new WorkoutModel()
+                    {
+                        WorkoutModelId = trainingRef.WorkoutId
+                    };
+                    trainingMdl.Workouts.Add(workoutMdl);
+                }
+                schedules.Add(trainingMdl);
+            }
+            return schedules;
         }
     }
 }

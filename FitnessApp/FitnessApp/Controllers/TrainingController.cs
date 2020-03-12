@@ -35,7 +35,18 @@ namespace FitnessApp.Controllers
 
         public async Task<IActionResult> ShowSchedules()
         {
-            return View();
+            var schedules = await trainingRepo.GetAllSchedules();
+            //var completeSchedules = AddWorkoutsToSchedules(List < TrainingModel > trainingModels)
+
+            return View(schedules);
+        }
+
+        public async Task<IActionResult> ShowSchedule(int trainingScheduleId)
+        {
+            var ids = await trainingRepo.GetWorkoutsIdsFromTraining(trainingScheduleId);
+            var workouts = await workoutRepo.GetWorkoutsByIds(ids);
+            var schedule = await trainingRepo.GetScheduleById(trainingScheduleId, workouts);
+            return View(schedule);
         }
 
         public IActionResult AddSchedule1()
@@ -68,7 +79,7 @@ namespace FitnessApp.Controllers
         {
             var ids = await trainingRepo.GetWorkoutsIdsFromTraining(trainingId);
             var workouts = await workoutRepo.GetWorkoutsByIds(ids);
-            var trainingSchedule = await trainingRepo.GetTraining(trainingId, workouts);
+            var trainingSchedule = await trainingRepo.GetScheduleById(trainingId, workouts);
             return View(trainingSchedule);
         }
     }
