@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200224093436_fixingthedb")]
-    partial class fixingthedb
+    [Migration("20200311095112_fixingDb")]
+    partial class fixingDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,6 +119,21 @@ namespace FitnessApp.Data.Migrations
                     b.HasIndex("PerformedExerciseId");
 
                     b.ToTable("PerformedSets");
+                });
+
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.TrainingSchedule", b =>
+                {
+                    b.Property<int>("TrainingScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TrainingScheduleId");
+
+                    b.ToTable("trainingSchedules");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.Workout", b =>

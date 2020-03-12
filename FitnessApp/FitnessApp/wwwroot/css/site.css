@@ -1,33 +1,23 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿/* Banner */
+#homePage {
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../Images/HomeImage2.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
 }
+
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #0366d6;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 @media (min-width: 768px) {
   html {
@@ -35,34 +25,13 @@ html {
   }
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
+    background-color: darkgrey;
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
-.footer {
+
+footer {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -71,11 +40,10 @@ body {
 }
 
 
-
+/* Nav bar ---------------------------------------------------------------------- Nav bar*/
  /* Navbar container */
 .navbar1 {
   overflow: hidden;
-  background-color: #474747;
   font-family: Arial;
 }
 
@@ -109,14 +77,15 @@ body {
 
 /* Add a red background color to navbar links on hover */
 .navbar1 a:hover, .dropdown1:hover .dropbtn {
-  background-color: red;
+  border: 1px solid white;
+  background-color: #00d478;
 }
 
 /* Dropdown content (hidden by default) */
 .dropdown1-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: darkgrey;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -125,7 +94,7 @@ body {
 /* Links inside the dropdown */
 .dropdown1-content a {
   float: none;
-  color: black;
+  color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -134,7 +103,7 @@ body {
 
 /* Add a grey background color to dropdown links on hover */
 .dropdown1-content a:hover {
-  background-color: #ddd;
+  background-color: #00d478;
 }
 
 /* Show the dropdown menu on hover */
@@ -325,39 +294,5 @@ tr:hover {
 .resizedTextbox2 {
     width: 40%;
     height: 25px;
-}
-
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: red;
-}
-
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: red;
-    opacity: 1;
-}
-
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: red;
-    opacity: 1;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: red;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: red;
-}
-
-::placeholder { /* Most modern browsers support this now. */
-    color: red;
-}
-
-#bg {
-    position: fixed;
-    left: 0;
-    /* Preserve aspet ratio */
-    min-width: 100%;
-    min-height: 25%;
 }
 

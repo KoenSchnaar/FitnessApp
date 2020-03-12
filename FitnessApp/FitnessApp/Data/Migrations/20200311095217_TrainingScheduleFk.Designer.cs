@@ -4,14 +4,16 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200311095217_TrainingScheduleFk")]
+    partial class TrainingScheduleFk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,37 +128,12 @@ namespace FitnessApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Days")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TrainingScheduleId");
 
                     b.ToTable("trainingSchedules");
-                });
-
-            modelBuilder.Entity("FitnessApp.DatabaseClasses.TrainingScheduleRef", b =>
-                {
-                    b.Property<int>("TrainingScheduleRefId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("TrainingScheduleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TrainingScheduleRefId");
-
-                    b.HasIndex("TrainingScheduleId");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("trainingScheduleRefs");
                 });
 
             modelBuilder.Entity("FitnessApp.DatabaseClasses.Workout", b =>
@@ -172,7 +149,12 @@ namespace FitnessApp.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TrainingScheduleId")
+                        .HasColumnType("int");
+
                     b.HasKey("WorkoutId");
+
+                    b.HasIndex("TrainingScheduleId");
 
                     b.ToTable("Workouts");
                 });
@@ -475,17 +457,11 @@ namespace FitnessApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FitnessApp.DatabaseClasses.TrainingScheduleRef", b =>
+            modelBuilder.Entity("FitnessApp.DatabaseClasses.Workout", b =>
                 {
                     b.HasOne("FitnessApp.DatabaseClasses.TrainingSchedule", "TrainingSchedule")
                         .WithMany()
                         .HasForeignKey("TrainingScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FitnessApp.DatabaseClasses.Workout", "Workout")
-                        .WithMany()
-                        .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

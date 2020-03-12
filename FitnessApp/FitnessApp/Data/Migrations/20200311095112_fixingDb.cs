@@ -1,13 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FitnessApp.Data.Migrations
 {
-    public partial class fixingthedb : Migration
+    public partial class fixingDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
             migrationBuilder.CreateTable(
                 name: "Exercises",
                 columns: table => new
@@ -24,6 +22,19 @@ namespace FitnessApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "trainingSchedules",
+                columns: table => new
+                {
+                    TrainingScheduleId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_trainingSchedules", x => x.TrainingScheduleId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Workouts",
                 columns: table => new
                 {
@@ -36,8 +47,6 @@ namespace FitnessApp.Data.Migrations
                 {
                     table.PrimaryKey("PK_Workouts", x => x.WorkoutId);
                 });
-
-            
 
             migrationBuilder.CreateTable(
                 name: "ExerciseSets",
@@ -173,7 +182,6 @@ namespace FitnessApp.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseSets_ExerciseId",
                 table: "ExerciseSets",
@@ -223,31 +231,16 @@ namespace FitnessApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
                 name: "ExerciseSets");
 
             migrationBuilder.DropTable(
                 name: "PerformedSets");
 
             migrationBuilder.DropTable(
-                name: "WorkoutRefs");
+                name: "trainingSchedules");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "WorkoutRefs");
 
             migrationBuilder.DropTable(
                 name: "PerformedExercises");
@@ -257,9 +250,6 @@ namespace FitnessApp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkoutForms");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Workouts");

@@ -32,7 +32,17 @@
                     <a asp-area="" asp-controller="Workout" asp-action="ShowWorkouts">Show Workouts</a>
                 </div>
             </div>
-                <partial name="_LoginPartial" />
+            <div class="dropdown1">
+                <button class="dropbtn">
+                    Training
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown1-content">
+                    <a asp-area="" asp-controller="Training" asp-action="ShowSchedules">Training schedules</a>
+                    <a asp-area="" asp-controller="Training" asp-action="AddSchedule1">Add schedule</a>
+                </div>
+            </div>
+            <partial name="_LoginPartial" />
 
         </div>
 

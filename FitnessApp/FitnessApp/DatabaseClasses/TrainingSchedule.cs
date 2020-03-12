@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.DatabaseClasses
 {
-    public class Workout
+    public class TrainingSchedule
     {
-        public int WorkoutId { get; set; }
+        public int TrainingScheduleId { get; set; }
         public string Name { get; set; }
-        public string MuscleGroup { get; set; }
+        public int Days { get; set; }
     }
 }
