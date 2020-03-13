@@ -11,21 +11,15 @@ namespace FitnessApp.Controllers
     public class WorkoutController : Controller
     {
         private readonly IExerciseRepository exerciseRepo;
-        private readonly IPerformedExerciseRepository performedExerciseRepo;
-        private readonly IRepsOfExerciseRepository repsOfExerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
         private readonly IWorkoutRepository workoutRepo;
 
         public WorkoutController(IExerciseRepository ExerciseRepo,
-            IPerformedExerciseRepository performedExerciseRepo,
-            IRepsOfExerciseRepository repsOfExerciseRepo,
             IWorkoutFormRepository workoutFormRepo,
             IWorkoutRepository workoutRepo
             )
         {
             exerciseRepo = ExerciseRepo;
-            this.performedExerciseRepo = performedExerciseRepo;
-            this.repsOfExerciseRepo = repsOfExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
         }
@@ -101,15 +95,16 @@ namespace FitnessApp.Controllers
 
         public async Task<IActionResult> UseWorkout(int workoutId)
         {
+            ViewBag.LastWorkout = await workoutFormRepo.GetLastWorkoutFormById(workoutId);
             var workout = await workoutRepo.GetWorkout(workoutId);
             var newWorkoutForm = workoutFormRepo.CreateWorkoutFormModel(workout);
             return View(newWorkoutForm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UseWorkout(WorkoutFormModel workout) 
+        public async Task<IActionResult> UseWorkout(WorkoutFormModel workoutForm) 
         {
-            await workoutFormRepo.CreateTotalWorkout(workout);
+            await workoutFormRepo.CreateTotalWorkout(workoutForm);
             return RedirectToAction("ShowWorkouts");
         }
     }

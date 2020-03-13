@@ -11,23 +11,17 @@ namespace FitnessApp.Controllers
     public class TrainingController : Controller
     {
         private readonly IExerciseRepository exerciseRepo;
-        private readonly IPerformedExerciseRepository performedExerciseRepo;
-        private readonly IRepsOfExerciseRepository repsOfExerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
         private readonly IWorkoutRepository workoutRepo;
         private readonly ITrainingRepository trainingRepo;
 
         public TrainingController(IExerciseRepository ExerciseRepo,
-            IPerformedExerciseRepository performedExerciseRepo,
-            IRepsOfExerciseRepository repsOfExerciseRepo,
             IWorkoutFormRepository workoutFormRepo,
             IWorkoutRepository workoutRepo,
             ITrainingRepository trainingRepo
             )
         {
             exerciseRepo = ExerciseRepo;
-            this.performedExerciseRepo = performedExerciseRepo;
-            this.repsOfExerciseRepo = repsOfExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
             this.trainingRepo = trainingRepo;
@@ -36,7 +30,6 @@ namespace FitnessApp.Controllers
         public async Task<IActionResult> ShowSchedules()
         {
             var schedules = await trainingRepo.GetAllSchedules();
-            //var completeSchedules = AddWorkoutsToSchedules(List < TrainingModel > trainingModels)
 
             return View(schedules);
         }

@@ -11,5 +11,6 @@ namespace FitnessApp.Repositories
         WorkoutFormModel CreateWorkoutFormModel(WorkoutModel workout);
         Task CreateTotalWorkout(WorkoutFormModel workoutForm);
         Task<PerformedExercise> CreatePerformedExercise(PerformedExerciseModel exercise, int workoutFormId);
+        Task<WorkoutFormModel> GetLastWorkoutFormById(int id);
     }
 }

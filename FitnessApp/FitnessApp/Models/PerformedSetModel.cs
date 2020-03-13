@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.Models
 {
-    public class SetsOfExerciseModel
+    public class PerformedSetModel
     {
-        public int RepsOfExerciseId { get; set; }
+        public int PerformedSetId { get; set; }
         public int PerformedExerciseId { get; set; }
         public int Reps { get; set; }
         public int WeightKG { get; set; }

@@ -29,8 +29,6 @@ namespace FitnessApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
-            services.AddScoped<IPerformedExerciseRepository, PerformedExerciseRepository>();
-            services.AddScoped<IRepsOfExerciseRepository, RepsOfExerciseRepository>();
             services.AddScoped<IWorkoutFormRepository, WorkoutFormRepository>();
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
             services.AddScoped<ITrainingRepository, TrainingRepository>();

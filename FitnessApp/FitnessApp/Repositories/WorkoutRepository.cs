@@ -74,16 +74,6 @@ namespace FitnessApp.Repositories
             return workoutModels;
         }
 
-        //public async Task<List<TrainingModel>> AddWorkoutsToSchedules(List<TrainingModel> trainingModels)
-        //{
-        //    foreach(var schedule in trainingModels)
-        //    {
-        //        var ints = new List<int>();
-
-        //    }
-
-        //}
-
         public async Task<List<WorkoutModel>> GetWorkoutsByIds(List<int> workoutIds)
         {
             var workouts = new List<Workout>();

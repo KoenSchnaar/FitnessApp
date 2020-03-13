@@ -63,7 +63,6 @@ namespace FitnessApp.Repositories
         public async Task<TrainingModel> GetScheduleById(int trainingSceduleId, List<WorkoutModel> workoutMdls)
         {
             var training = await context.trainingSchedules.SingleAsync(m => m.TrainingScheduleId == trainingSceduleId);
-            //var workouts = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == trainingSceduleId).ToListAsync();
 
             var trainingMdl = new TrainingModel
             {
