@@ -1,0 +1,11 @@
+﻿@model FitnessApp.Models.TrainingModel
+
+<div class="card">
+    <div class="card-header">
+        <div>@Model.Name</div>
+    </div>
+    <div class="card-body">
+        This training schedule has @Model.Workouts.Count() workouts
+        <a style="text-align: right" asp-controller="Training" asp-action="ShowSchedule" asp-route-trainingScheduleId="@Model.TrainingModelId">Go to</a>
+    </div>
+</div> <br/>

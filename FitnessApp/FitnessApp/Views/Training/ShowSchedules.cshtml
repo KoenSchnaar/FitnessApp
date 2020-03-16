@@ -1,23 +1,9 @@
 ﻿@model List<FitnessApp.Models.TrainingModel>
 
-<h1>ShowSchedules</h1>
+<h1 style="text-align: center">Training Schedules</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Days</th>
-            <th>View</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var exercise in Model)
-        {
-            <tr>
-                <td>@exercise.Name</td>
-                <td>@exercise.Workouts.Count()</td>
-                <td><a asp-controller="Training" asp-action="ShowSchedule" asp-route-trainingScheduleId="@exercise.TrainingModelId">Go to</a></td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+@foreach (var schedule in Model)
+{
+    <partial name="_TrainingScheduleSummary" model="schedule" />
+}

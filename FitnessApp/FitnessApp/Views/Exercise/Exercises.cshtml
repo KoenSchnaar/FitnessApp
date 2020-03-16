@@ -2,17 +2,8 @@
 
 <h1>Exercises</h1>
 
-<table class="table-content">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Discription</th>
-            <th>Muscle Group</th>
-            <th></th>
-        </tr>
-    </thead>
+@foreach (var Exercise in Model)
+{
+    <partial name="_ExerciseSummary" model="Exercise" />
+}
 
-        @Html.DisplayForModel()
-
-</table>
