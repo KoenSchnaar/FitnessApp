@@ -50,7 +50,11 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSchedule1(TrainingModel training)
         {
-            return RedirectToAction("AddSchedule2", training);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("AddSchedule2", training);
+            }
+            return View();
         }
 
         public async Task<IActionResult> AddSchedule2(TrainingModel training)

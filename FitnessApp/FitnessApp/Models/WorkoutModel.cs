@@ -12,6 +12,7 @@ namespace FitnessApp.Models
         public string MuscleGroup { get; set; }
         public List<ExerciseModel> Exercises { get; set; }
         public int HighestSets { get; set; }
+        public DateTime DateCreated { get; set; }
 
     }
 }

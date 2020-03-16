@@ -3,16 +3,33 @@
     ViewData["Title"] = "ShowWorkouts";
 }
 
-<h1>Workouts</h1>
+<h1 style="text-align: center">Workouts</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Muscle Group</th>
-        </tr>
-    </thead>
+@*<table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Muscle Group</th>
+            </tr>
+        </thead>
 
-    @Html.DisplayForModel()
+        @Html.DisplayForModel()
 
-</table>
+    </table>*@
+
+@for (int i = 0; i < @Model.Count(); i++)
+{
+    <div class="card text-center">
+        <div class="card-header">
+            @(i+1)
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Model[i].Name</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a asp-controller="Workout" asp-action="ShowWorkout" asp-route-WorkoutId="@Model[i].WorkoutModelId" class="btn btn-primary">Look into workout</a>
+        </div>
+        <div class="card-footer text-muted">
+            Created on: @Model[i].DateCreated
+        </div>
+    </div><br />
+}

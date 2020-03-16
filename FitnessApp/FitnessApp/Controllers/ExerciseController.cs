@@ -35,8 +35,22 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ExerciseModel exercise)
         {
-            await exerciseRepo.AddExercise(exercise);
+            if (ModelState.IsValid)
+            {
+                await exerciseRepo.AddExercise(exercise);
+                return RedirectToAction("Add");
+            }
             return View();
+        }
+
+        public async Task<IActionResult> Edit(int exerciseId)
+        {
+            var exercise = await exerciseRepo.GetExercise(exerciseId);
+            if(exercise == null)
+            {
+                return NotFound();
+            }
+            return View(exercise);
         }
 
         public async Task<IActionResult> Delete(int exerciseId)
