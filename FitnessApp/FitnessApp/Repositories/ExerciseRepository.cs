@@ -87,6 +87,17 @@ namespace FitnessApp.Repositories
             await context.SaveChangesAsync();
         }
 
+        public async Task Edit(ExerciseModel exercise)
+        {
+            var Exercise = await context.Exercises.SingleOrDefaultAsync(m => m.ExerciseId == exercise.ExerciseId);
+
+            Exercise.Name = exercise.Name;
+            Exercise.Discription = exercise.Discription;
+            Exercise.MuscleGroup = exercise.MuscleGroup;
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task Delete(int exerciseId)
         {
             var entity = await context.Exercises.SingleAsync(m => m.ExerciseId == exerciseId);

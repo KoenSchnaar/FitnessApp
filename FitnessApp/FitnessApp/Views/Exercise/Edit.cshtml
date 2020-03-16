@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" asp-controller="Exercise" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -31,6 +31,8 @@
                 <span asp-validation-for="MuscleGroup" class="text-danger"></span>
             </div>
 
+            @Html.HiddenFor(m => m.ExerciseId)
+
             <div class="form-group">
                 <input type="submit" value="Save changes" class="btn btn-primary" />
             </div>
@@ -41,4 +43,3 @@
 <div>
     <a asp-action="Exercises">Back to exercises</a>
 </div>
-

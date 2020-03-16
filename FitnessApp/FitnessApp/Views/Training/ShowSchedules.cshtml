@@ -1,8 +1,8 @@
 ﻿@model List<FitnessApp.Models.TrainingModel>
 
-<h1 style="text-align: center">Training Schedules</h1>
+<h1 class="text-center">Training Schedules</h1>
 
-
+<hr />
 @foreach (var schedule in Model)
 {
     <partial name="_TrainingScheduleSummary" model="schedule" />

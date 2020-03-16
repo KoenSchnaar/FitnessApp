@@ -53,6 +53,18 @@ namespace FitnessApp.Controllers
             return View(exercise);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(ExerciseModel exercise)
+        {
+            if (ModelState.IsValid)
+            {
+                await exerciseRepo.Edit(exercise);
+                TempData["Message"] = "You have succesfully changed the exercise!";
+                return RedirectToAction("Exercises");
+            }
+            return View(exercise);
+        }
+
         public async Task<IActionResult> Delete(int exerciseId)
         {
             await exerciseRepo.Delete(exerciseId);
