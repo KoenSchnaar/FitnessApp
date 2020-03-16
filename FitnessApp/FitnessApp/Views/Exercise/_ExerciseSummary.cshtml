@@ -3,21 +3,21 @@
     var path = $@"..\..\Images\ExercisePictures\{Model.ExerciseId}.jpg";
 }
 
-<a class="btn-link text-dark" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@Model.ExerciseId">
-    <div class="card text-center" style="width: 18rem;">
-        <div class="card-header font-weight-bold">
+<div class="card text-center" style="width: 18rem;">
+    <div class="card-header font-weight-bold">
+        <a class="btn-link text-dark" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@Model.ExerciseId">
             @Model.Name
-        </div>
+        </a>
+    </div>
 
-        <img class="card-img-top" src="@path" alt="Card image cap">
+    <img class="card-img-top" src="@path" alt="Card image cap">
 
-        <div class="card-body">
-            @Model.MuscleGroup
-            @Model.Discription
-            <div>
-                <a asp-controller="Exercise" asp-action="Edit" asp-route-exerciseId="@Model.ExerciseId"><img src="..\..\Images\EditIcon.png" width="25" height="25" /></a>
-                <a asp-controller="Exercise" asp-action="Delete" asp-route-exerciseId="@Model.ExerciseId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a>
-            </div>
+    <div class="card-body">
+        <p class="card-text">@Model.MuscleGroup</p>
+        <p class="card-text">@Model.Discription</p>
+        <div>
+            <a asp-controller="Exercise" asp-action="Edit" asp-route-exerciseId="@Model.ExerciseId"><img src="..\..\Images\EditIcon.png" width="25" height="25" /></a>
+            <a asp-controller="Exercise" asp-action="Delete" asp-route-exerciseId="@Model.ExerciseId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a>
         </div>
     </div>
-</a>
+</div>

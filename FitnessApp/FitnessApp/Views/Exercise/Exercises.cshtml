@@ -2,8 +2,13 @@
 
 <h1>Exercises</h1>
 
-@foreach (var Exercise in Model)
-{
-    <partial name="_ExerciseSummary" model="Exercise" />
-}
+<div class="container">
+    <div class="card-columns">
+        @foreach (var Exercise in Model)
+        {
+            <partial name="_ExerciseSummary" model="Exercise" />
+        }
+    </div>
+</div>
+
 
