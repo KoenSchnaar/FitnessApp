@@ -12,5 +12,7 @@ namespace FitnessApp.Repositories
         Task<TrainingModel> GetScheduleById(int trainingSceduleId, List<WorkoutModel> workoutMdls);
         Task<List<int>> GetWorkoutsIdsFromTraining(int trainingId);
         Task<List<TrainingModel>> GetAllSchedules();
+        Task Delete(int TrainingId);
+        Task Edit(TrainingModel trainingSchedule);
     }
 }

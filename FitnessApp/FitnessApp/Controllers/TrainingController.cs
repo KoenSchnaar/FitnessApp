@@ -79,5 +79,32 @@ namespace FitnessApp.Controllers
             var trainingSchedule = await trainingRepo.GetScheduleById(trainingId, workouts);
             return View(trainingSchedule);
         }
+
+        public async Task<IActionResult> Edit(int trainingId)
+        {
+            var ids = await trainingRepo.GetWorkoutsIdsFromTraining(trainingId);
+            var workouts = await workoutRepo.GetWorkoutsByIds(ids);
+            var trainingSchedule = await trainingRepo.GetScheduleById(trainingId, workouts);
+            return View(trainingSchedule);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(TrainingModel schedule)
+        {
+            if (ModelState.IsValid)
+            {
+                await trainingRepo.Edit(schedule);
+                TempData["Message"] = "You have succesfully changed your training schedule!";
+                return RedirectToAction("ShowSchedules");
+            }
+            return View();
+
+        }
+
+        public async Task<IActionResult> Delete(int trainingId)
+        {
+            await trainingRepo.Delete(trainingId);
+            return RedirectToAction("ShowSchedules");
+        }
     }
 }

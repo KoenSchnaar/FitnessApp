@@ -1,3 +1,40 @@
 ﻿<body id="homePage">
+    <br/>
+    <br/>
+    <br/>
+    <div class="card-columns">
+        <a asp-controller="Exercise" asp-action="Exercises">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center">Exercises</div>
+                <div class="card-body">
+                    <h5 class="card-title">Everything about exercises</h5>
+                    <p class="card-text">In here you can look into all the different exercises. Use it for inspiration or to look up information about certain exercises.</p>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </a>
 
+        <a asp-controller="Workout" asp-action="ShowWorkouts"> 
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center">Workouts</div>
+                <div class="card-body">
+                    <h5 class="card-title">Create, use and customize workouts</h5>
+                    <p class="card-text">Do you want to use or create your own workout or do you want to use a pre-made workout? Everything is in here.</p>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </a>
+
+        <a asp-controller="Training" asp-action="ShowSchedules">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center">Training Schedules</div>
+                <div class="card-body">
+                    <h5 class="card-title">Create, use and customize your personal training schedules</h5>
+                    <p class="card-text">Do you want to use or create your own training schedule or do you want to use a pre-made schedule? Everything is in here.</p>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </a>
+    </div>
 </body>
+

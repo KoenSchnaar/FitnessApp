@@ -1,8 +1,12 @@
 ﻿@model FitnessApp.Models.TrainingModel
 
-<div class="card">
+<div class="card bg-dark text-white">
     <div class="card-header">
         <div>@Model.Name</div>
+        <div>
+            <a asp-controller="Training" asp-action="Edit" asp-route-TrainingId="@Model.TrainingModelId"><img src="..\..\Images\EditIcon.png" width="25" height="25" /></a>
+            <a asp-controller="Training" asp-action="Delete" asp-route-TrainingId="@Model.TrainingModelId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a>
+        </div>
     </div>
     <div class="card-body">
         This training schedule has @Model.Workouts.Count() workouts

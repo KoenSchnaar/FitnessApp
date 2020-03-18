@@ -103,5 +103,20 @@ namespace FitnessApp.Repositories
             }
             return schedules;
         }
+
+        public async Task Edit(TrainingModel trainingSchedule)
+        {
+            var entity = await context.trainingSchedules.SingleOrDefaultAsync(m => m.TrainingScheduleId == trainingSchedule.TrainingModelId);
+
+            entity.Name = trainingSchedule.Name;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int TrainingId)
+        {
+            var entity = await context.trainingSchedules.SingleOrDefaultAsync(m => m.TrainingScheduleId == TrainingId);
+            context.trainingSchedules.Remove(entity);
+            await context.SaveChangesAsync();
+        }
     }
 }

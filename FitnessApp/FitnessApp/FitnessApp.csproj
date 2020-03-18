@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200310152714_TrainingSchedule.cs" />
+    <Compile Remove="Data\Migrations\20200310152714_
+             .cs" />
     <Compile Remove="Data\Migrations\20200310152714_TrainingSchedule.Designer.cs" />
     <Compile Remove="Data\Migrations\20200310153420_TrainingScheduleFK.cs" />
     <Compile Remove="Data\Migrations\20200310153420_TrainingScheduleFK.Designer.cs" />
