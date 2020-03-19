@@ -12,6 +12,11 @@ a {
     color: #0366d6;
 }
 
+
+
+
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -25,6 +30,11 @@ html {
   }
 }
 
+h1{
+    text-align: center;
+    color: white;
+}
+
 body {
     background-color: #696969;
     /* Margin bottom by footer height */
@@ -32,21 +42,36 @@ body {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      white-space: nowrap;
+      line-height: 60px; /* Vertically center the text there */
+}
+
+.border-top-black {
+    border-top: 1px solid #343a40;
 }
 
 
-/* Nav bar ---------------------------------------------------------------------- Nav bar*/
- /* Navbar container */
 
+
+
+
+
+/* Nav bar ---------------------------------------------------------------------- Nav bar*/
+/* Navbar container */
+.nav-link {
+    color: #fff;
+}
+
+.nav-link:hover {
+    color: grey;
+}
 
 /* Login aligned right*/
 .LoginService {
-    float: right;
+    margin: 10px;
 }
 
 .LoginSomething {
@@ -54,68 +79,76 @@ footer {
     float: right;
 }
 
-
-/* Table views layout*/
-td {
-    padding-right: 15px;
+.loginBtn{
+    color: #fff;
 }
 
-th {
-    padding-right: 15px;
-    /*border-bottom: 1px solid #ddd;
-    border-bottom-style: double;*/
-    background-color: #00d478;
-    color: white;
+.loginBtn:hover {
+    color: grey;
 }
 
-thead {
-    padding-bottom: 30px;
-    margin-bottom: 30px;
+.loginBtn:hover{
+    text-decoration: none;
 }
 
-tr:hover {
-    background-color: #f5f5f5;
+.logoutBtn {
+    color: #fff;
 }
 
-/* Table layout */
+.logoutBtn:hover {
+    color: grey;
+}
 
-.table-content{
-    border-collapse: collapse;
-    margin: 25px 0px;
-    font-size: 0.9em;
-    border-radius: 5px 5px 0px 0px;
+
+
+
+
+
+
+/************************************** Table layout **************************************/
+.darkTable {
+    color: #fff;
+    background-color: #343a40;
+    border-radius: 5px 5px 5px 5px;
     overflow: hidden;
 }
 
-.table-content th, table-content td{
-    padding: 12px 15px;
+th {
+    background-color: #2d3338;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: left;
 }
 
-.SetsWeight th{
-    padding-bottom: 0px;
-    padding-top: 0px;
-    text-align: center;
+td {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
 }
 
-.table-content td{
-    padding: 5px 5px 5px 5px;
+
+.wide td:not(:first-child) {
+    padding-right: 80px;
 }
 
-.table-content tr:last-of-type{
-    border-bottom: 2px solid #00d478;
+.tableBtn{
+    margin-top: 10px;
 }
 
-.SetsWeight td:nth-child(2n+1) {
-    border-right: 1px solid #00d478;
+tbody tr:hover {
+    background-color: #2d3338;
 }
 
-/* Font layout */
-/*body, html {
-    font-family: 'Lato', monospace;
-}*/
 
 
-/* Checkbox layout */
+
+
+
+/************************************** Checkbox layout **************************************/
 .label__checkbox {
     display: none;
 }
@@ -139,7 +172,7 @@ tr:hover {
 {
     opacity: 0.2;
     font-size: ~'calc(1rem + 1vw)';
-    color: transparent;
+    /*color: transparent;*/
     transition: opacity .3s .1s ease;
     -webkit-text-stroke: 3px rgba(0,0,0,.5);
 }
@@ -166,6 +199,101 @@ tr:hover {
 }
 
 
+
+
+/************************************** Textboxes **************************************/
+.resizedTextbox {
+    width: 50px;
+    height: 20px
+}
+
+.resizedTextbox2 {
+    width: 40%;
+    height: 25px;
+}
+
+
+
+
+/************************************** Cards **************************************/
+.card-img-top {
+    width: 100%;
+    /*height: 15vw;*/
+    object-fit: cover;
+}
+
+.card:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+
+.content{
+    margin-top: 50px;
+}
+
+.cardButton {
+    border: 1px solid black;
+    width: 320px;
+    color: white;
+    background-color: #343a40;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.cardButton:hover {
+    text-decoration: none;
+    color: grey;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.cardBtn-header {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+.cardBtn-body {
+    padding-top: 5px;
+}
+
+
+
+
+
+/************************************** Resonsive css **************************************/
+/************************************** cards **************************************/
+@media (min-width:356px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width:576px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width:768px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width:992px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width:1200px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+
+
+
+/************************************** checkboxes **************************************/
 @keyframes icon {
     from {
         opacity: 0;
@@ -215,58 +343,5 @@ tr:hover {
         background: #00d478;
         border: 0;
         opacity: 1;
-    }
-}
-
-/* Textboxes */
-.resizedTextbox {
-    width: 50px;
-    height: 20px
-}
-
-.resizedTextbox2 {
-    width: 40%;
-    height: 25px;
-}
-
-/* Cards */
-.card-img-top {
-    width: 100%;
-    /*height: 15vw;*/
-    object-fit: cover;
-}
-
-.card:hover {
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-
-@media (min-width:356px) {
-    .card-columns {
-        column-count: 1;
-    }
-}
-
-@media (min-width:576px) {
-    .card-columns {
-        column-count: 1;
-    }
-}
-
-@media (min-width:768px) {
-    .card-columns {
-        column-count: 2;
-    }
-}
-
-@media (min-width:992px) {
-    .card-columns {
-        column-count: 3;
-    }
-}
-
-@media (min-width:1200px) {
-    .card-columns {
-        column-count: 3;
     }
 }

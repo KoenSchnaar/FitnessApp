@@ -1,25 +1,29 @@
 ﻿@model FitnessApp.Models.TrainingModel
 
 <h1>Overview</h1>
-<form>
-    <table class="table-content">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Workout</th>
-                <th>Muscle group</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Workouts.Count(); i++)
-            {
+
+<hr />
+<div align="center">
+    <form>
+        <table class="darkTable form">
+            <thead>
                 <tr>
-                    <td>Day @(i+1)</td>
-                    <td>@Model.Workouts[i].Name</td>
-                    <td>@Model.Workouts[i].MuscleGroup</td>
+                    <th></th>
+                    <th>Workout</th>
+                    <th>Muscle group</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <button class="btn-primary btn" asp-controller="training" asp-action="AddSchedule3">Save</button>
-</form>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Workouts.Count(); i++)
+                {
+                    <tr>
+                        <td>Day @(i + 1)</td>
+                        <td>@Model.Workouts[i].Name</td>
+                        <td>@Model.Workouts[i].MuscleGroup</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button class="btn-dark btn tableBtn" asp-controller="training" asp-action="ShowSchedules">Go to training schedules</button>
+    </form>
+</div>

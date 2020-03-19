@@ -3,34 +3,35 @@
     ViewData["Title"] = "CreateWorkout4";
 }
 
-<h1>Overview</h1>
+<h1 class="text-center">Overview</h1>
 
-<table class="table-content">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            @for (var x = 1; x < @Model.HighestSets + 1; x++)
+<hr />
+<div align="center">
+    <table class="darkTable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                @for (var x = 1; x < @Model.HighestSets + 1; x++)
+                {
+                    <th>Set @x</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var exercise in Model.Exercises)
             {
-                <th>Set @x</th>
+                var path = $@"..\..\Images\ExercisePictures\{exercise.ExerciseId}.jpg";
+                <tr>
+                    <td> <img src="@path" style=" height: 56px; width: 100px " /></td>
+                    <td><a class="btn-link text-white" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@exercise.ExerciseId">@exercise.Name</a></td>
+                    @for (var x = 0; x < exercise.Sets.Count(); x++)
+                    {
+                        <td>@exercise.Sets[x].Reps</td>
+                    }
+                </tr>
             }
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var exercise in Model.Exercises)
-        {
-            var path = $@"..\..\Images\ExercisePictures\{exercise.ExerciseId}.jpg";
-        <tr>
-            <td> <img src="@path" style=" height: 56px; width: 100px " /></td>
-            <td><a class="btn-link text-dark" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@exercise.ExerciseId">@exercise.Name</a></td>
-            @for (var x = 0; x < exercise.Sets.Count(); x++)
-            {
-                <td>@exercise.Sets[x].Reps</td>
-            }
-        </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

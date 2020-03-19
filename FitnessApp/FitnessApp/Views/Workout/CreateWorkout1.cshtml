@@ -5,24 +5,26 @@
 
 <div align="center">
     <h1>Create workout</h1>
+
+    <hr />
     <form method="post" asp-controller="Workout" asp-action="CreateWorkout1">
         <input type="text" placeholder="Name" class="form-control resizedTextbox2" name="name" style="margin-bottom: 5px" />
         <input type="text" placeholder="Muscle group" class="form-control resizedTextbox2" name="muscleGroup" />
         <br />
 
-        <table class="table-content">
+
+        <table class="darkTable wide">
             <thead>
                 <tr>
                     <th></th>
                     <th>Name</th>
-                    <th>Discription</th>
                     <th>Muscle Group</th>
                 </tr>
             </thead>
-
-            @Html.EditorForModel()
-
+            <tbody>
+                @Html.EditorForModel()
+            </tbody>
         </table>
-        <button class="btn-primary btn" asp-controller="Workout" asp-action="CreateWorkout1">Next</button>
+        <button class="btn btn-dark tableBtn" asp-controller="Workout" asp-action="CreateWorkout1">Next</button>
     </form>
 </div>
