@@ -1,15 +1,19 @@
 ﻿@model FitnessApp.Models.TrainingModel
 
 <div class="card bg-dark text-white">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
         <div>@Model.Name</div>
         <div>
             <a asp-controller="Training" asp-action="Edit" asp-route-TrainingId="@Model.TrainingModelId"><img src="..\..\Images\EditIcon.png" width="25" height="25" /></a>
             <a asp-controller="Training" asp-action="Delete" asp-route-TrainingId="@Model.TrainingModelId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a>
         </div>
     </div>
-    <div class="card-body">
-        This training schedule has @Model.Workouts.Count() workouts
-        <a style="text-align: right" asp-controller="Training" asp-action="ShowSchedule" asp-route-trainingScheduleId="@Model.TrainingModelId">Go to</a>
+    <div class="d-flex flex-row card-body justify-content-between align-items-center">
+            <div class="text-center">
+                This training schedule has @Model.Workouts.Count() workouts
+            </div>
+            <div >
+                <a class="btn-dark btn" asp-controller="Training" asp-action="ShowSchedule" asp-route-trainingScheduleId="@Model.TrainingModelId">Go to</a>
+            </div>
     </div>
 </div> <br/>

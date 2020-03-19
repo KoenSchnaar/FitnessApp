@@ -4,46 +4,63 @@
 }
 
 <h1>Fill in your sets</h1>
-<form method="post">
-    <table class="table-content SetsWeight">
-        <thead>
-            @* de echte gegevens *@
-            <tr>
-                <th></th>
-                @for (int i = 1; i < @Model.HighestSets + 1; i++)
-                {
-                    <th colspan="4">set @i</th>
-                }
-            </tr>
-            <tr>
-                <th>Exercise</th>
-                @for (int i = 1; i < @Model.HighestSets + 1; i++)
-                {
-                    <th>reps</th>
-                    <th>weight</th>
-                    <th>reps</th>
-                    <th>weight</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @Html.HiddenFor(m => m.workoutId)
-            @for (int x = 0; x < @Model.PerformedExercises.Count(); x++)
-            {
-                @Html.HiddenFor(m => m.PerformedExercises[x].ExerciseId)
-                @Html.HiddenFor(m => m.PerformedExercises[x].Name)
+
+<hr />
+<div align="center" class="overflow-auto">
+    <form method="post">
+        <table class="darkTable form">
+            <thead>
+                @* de echte gegevens *@
                 <tr>
-                    <td>@Model.PerformedExercises[x].Name</td>
-                    @for (int y = 0; y < @Model.PerformedExercises[x].NumberOfSets; y++)
+                    <th></th>
+                    @for (int i = 1; i < @Model.HighestSets + 1; i++)
                     {
-                        <td>@lastWorkout.PerformedExercises[x].Sets[y].Reps</td>
-                        <td>@lastWorkout.PerformedExercises[x].Sets[y].WeightKG</td>
-                        <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].Reps, new { @class = "resizedTextbox form-control" }) </td>
-                        <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control", placeholder = "kg" }) </td>
+                        @if (lastWorkout != null)
+                        {
+                            <th colspan="4">set @i</th>
+                        }
+                        else
+                        {
+                            <th colspan="2">set @i</th>
+                        }
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-    <button class="btn-dark btn" asp-controller="Workout" asp-action="UseWorkout">Next</button>
-</form>
+                <tr>
+                    <th>Exercise</th>
+                    @for (int i = 1; i < @Model.HighestSets + 1; i++)
+                    {
+                        @if (lastWorkout != null)
+                        {
+                            <th>reps</th>
+                            <th>weight</th>
+                        }
+                        <th>reps</th>
+                        <th>weight</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @Html.HiddenFor(m => m.workoutId)
+                @for (int x = 0; x < @Model.PerformedExercises.Count(); x++)
+                {
+                    @Html.HiddenFor(m => m.PerformedExercises[x].ExerciseId)
+                    @Html.HiddenFor(m => m.PerformedExercises[x].Name)
+                    <tr>
+                        <td>@Model.PerformedExercises[x].Name</td>
+                        @for (int y = 0; y < @Model.PerformedExercises[x].NumberOfSets; y++)
+                        {
+                            @if (lastWorkout != null)
+                            {
+                                <td>@lastWorkout.PerformedExercises[x].Sets[y].Reps</td>
+                                <td>@lastWorkout.PerformedExercises[x].Sets[y].WeightKG</td>
+                            }
+                            <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].Reps, new { @class = "resizedTextbox form-control" }) </td>
+                            <td align="center"> @Html.TextBoxFor(m => m.PerformedExercises[x].Sets[y].WeightKG, new { @class = "resizedTextbox form-control", placeholder = "kg" }) </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button class="btn-dark btn tableBtn" asp-controller="Workout" asp-action="UseWorkout">Save</button>
+    </form>
+</div>

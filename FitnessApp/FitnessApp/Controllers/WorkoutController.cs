@@ -105,7 +105,7 @@ namespace FitnessApp.Controllers
         public async Task<IActionResult> UseWorkout(WorkoutFormModel workoutForm) 
         {
             await workoutFormRepo.CreateTotalWorkout(workoutForm);
-            return RedirectToAction("ShowWorkouts");
+            return RedirectToAction("ShowSchedules", "Training");
         }
     }
 }

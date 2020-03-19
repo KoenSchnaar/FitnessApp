@@ -32,7 +32,6 @@ html {
 
 h1{
     text-align: center;
-    color: white;
 }
 
 body {
@@ -137,6 +136,7 @@ td {
 
 .tableBtn{
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 tbody tr:hover {

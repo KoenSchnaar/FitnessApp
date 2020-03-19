@@ -1,11 +1,12 @@
 ﻿@model List<FitnessApp.Models.WorkoutModel>
 
-@{ 
+@{
     TrainingModel training = ViewBag.Training;
 }
 
 <h1>Choose workouts</h1>
 
+<hr />
 <div align="center">
     <form method="post" asp-controller="training" asp-action="AddSchedule2">
         <table class="darkTable wide">
