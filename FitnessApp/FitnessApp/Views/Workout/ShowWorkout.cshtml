@@ -26,7 +26,7 @@
                     <td> <img src="@path" style=" height: 56px; width: 100px " /></td>
                     <td><a class="btn-link text-white" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@exercise.ExerciseId">@exercise.Name</a></td>
                     <td>@exercise.Sets.Count()</td>
-                    <td><a asp-controller="Workout" asp-action="DeleteExercise" asp-route-exerciseId="@exercise.ExerciseId" asp-route-workoutID="@Model.WorkoutModelId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a></td>
+                    <td><a asp-controller="Workout" asp-action="DeleteExercise" asp-route-exerciseId="@exercise.ExerciseId" asp-route-workoutID="@Model.WorkoutModelId"><img src="..\..\Images\DeleteIconWhite.png" width="25" height="25" /></a></td>
                 </tr>
             }
         </tbody>

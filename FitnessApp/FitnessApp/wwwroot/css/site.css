@@ -9,20 +9,23 @@
 
 /* Provide sufficient contrast against white background */
 a {
-    color: #0366d6;
+    color: #fff;
 }
 
+a:hover{
+    text-decoration: none;
+    color: grey;
+}
 
-
-
-
-
+.icon{
+    padding: 5px;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
-  position: relative;
-  min-height: 100%;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 @media (min-width: 768px) {
   html {

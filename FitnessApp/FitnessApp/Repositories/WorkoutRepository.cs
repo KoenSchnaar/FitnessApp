@@ -31,6 +31,16 @@ namespace FitnessApp.Repositories
             await context.SaveChangesAsync();
         }
 
+        public async Task EditWorkout(WorkoutModel workoutMdl)
+        {
+            var workout = await context.Workouts.SingleOrDefaultAsync(m => m.WorkoutId == workoutMdl.WorkoutModelId);
+
+            workout.Name = workoutMdl.Name;
+            workout.MuscleGroup = workoutMdl.MuscleGroup;
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task<List<WorkoutModel>> GetWorkouts()
         {
             var workouts = await context.Workouts.ToListAsync();
