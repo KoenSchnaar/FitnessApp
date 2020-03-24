@@ -1,10 +1,11 @@
 ﻿/* Banner */
-/*#homePage {
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../Images/HomeImage2.jpg);
-    height: 100vh;
+.banner {
+    margin-top: 30px;
+    height: 220px; 
+    background-image: url(../Images/HomeImage2.jpg);
     background-size: cover;
-    background-position: center;
-}*/
+    background-position: center -125px;
+}
 
 
 /* Provide sufficient contrast against white background */
