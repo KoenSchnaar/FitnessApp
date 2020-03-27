@@ -41,7 +41,7 @@ namespace FitnessApp.Controllers
                 if (exercise.ImageUpload != null)
                 {
                     Upload upload = new Upload();
-                    upload.UploadPicture(exercise.ImageUpload);
+                    upload.UploadPicture(exercise);
                 }
                 await exerciseRepo.AddExercise(exercise);
                 return RedirectToAction("Add");
