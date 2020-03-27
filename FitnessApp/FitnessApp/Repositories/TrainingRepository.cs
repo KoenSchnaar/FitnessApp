@@ -63,7 +63,6 @@ namespace FitnessApp.Repositories
         public async Task<TrainingModel> GetScheduleById(int trainingSceduleId, List<WorkoutModel> workoutMdls)
         {
             var training = await context.trainingSchedules.SingleAsync(m => m.TrainingScheduleId == trainingSceduleId);
-            //var workouts = await context.trainingScheduleRefs.Where(m => m.TrainingScheduleId == trainingSceduleId).ToListAsync();
 
             var trainingMdl = new TrainingModel
             {
@@ -103,6 +102,21 @@ namespace FitnessApp.Repositories
                 schedules.Add(trainingMdl);
             }
             return schedules;
+        }
+
+        public async Task Edit(TrainingModel trainingSchedule)
+        {
+            var entity = await context.trainingSchedules.SingleOrDefaultAsync(m => m.TrainingScheduleId == trainingSchedule.TrainingModelId);
+
+            entity.Name = trainingSchedule.Name;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int TrainingId)
+        {
+            var entity = await context.trainingSchedules.SingleOrDefaultAsync(m => m.TrainingScheduleId == TrainingId);
+            context.trainingSchedules.Remove(entity);
+            await context.SaveChangesAsync();
         }
     }
 }

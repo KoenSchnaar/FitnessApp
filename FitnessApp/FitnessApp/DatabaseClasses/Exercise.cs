@@ -11,5 +11,6 @@ namespace FitnessApp.DatabaseClasses
         public string Name { get; set; }
         public string Discription { get; set; }
         public string MuscleGroup { get; set; }
+        public string ImagePath { get; set; }
     }
 }

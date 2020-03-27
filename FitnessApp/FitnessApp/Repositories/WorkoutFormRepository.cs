@@ -51,6 +51,64 @@ namespace FitnessApp.Repositories
             return workoutForm;
         }
 
+        public async Task<WorkoutFormModel> GetLastWorkoutFormById(int id)
+        {
+            var workoutForms = await context.WorkoutForms.Where(m => m.WorkoutId == id).ToListAsync();
+
+            if (workoutForms.Count() != 0)
+            {
+                var workoutForm = workoutForms.Last();
+
+                var workoutFormMdl = new WorkoutFormModel()
+                {
+                    WorkoutFormId = workoutForm.WorkoutFormId,
+                    workoutId = workoutForm.WorkoutId,
+                    Day = workoutForm.Day,
+                    Month = workoutForm.Month,
+                    Year = workoutForm.Year
+                };
+
+                var pExercises = await context.PerformedExercises.Where(m => m.WorkoutFormId == workoutForm.WorkoutFormId).ToListAsync();
+                var pExerciseMdls = new List<PerformedExerciseModel>();
+
+                foreach (var exercise in pExercises)
+                {
+                    var pExerciseMdl = new PerformedExerciseModel()
+                    {
+                        PerformedExerciseId = exercise.PerformedExerciseId,
+                        ExerciseId = exercise.ExerciseId,
+                        WorkoutFormId = exercise.WorkoutFormId,
+                        Name = exercise.Name,
+                        NumberOfSets = exercise.NumberOfSets
+                    };
+
+                    var pSets = await context.PerformedSets.Where(m => m.PerformedExerciseId == exercise.PerformedExerciseId).ToListAsync();
+                    var pSetMdls = new List<PerformedSetModel>();
+
+                    foreach (var set in pSets)
+                    {
+                        var pSetMdl = new PerformedSetModel()
+                        {
+                            PerformedSetId = set.PerformedSetId,
+                            PerformedExerciseId = set.PerformedExerciseId,
+                            Reps = set.Reps,
+                            WeightKG = set.WeightKG
+                        };
+                        pSetMdls.Add(pSetMdl);
+                    }
+                    pExerciseMdl.Sets = pSetMdls;
+                    pExerciseMdls.Add(pExerciseMdl);
+                }
+                workoutFormMdl.PerformedExercises = pExerciseMdls;
+                return workoutFormMdl;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        // this creates a workoutform and fills in the reps and weight of the exercises
         public async Task CreateTotalWorkout(WorkoutFormModel workoutForm)
         {
             var workout = await CreateWorkoutForm(workoutForm);
@@ -73,6 +131,7 @@ namespace FitnessApp.Repositories
             await context.SaveChangesAsync();
         }
 
+        // creates an empty workoutForm
         public async Task<WorkoutForm> CreateWorkoutForm(WorkoutFormModel workoutForm)
         {
             var workout = new WorkoutForm()
@@ -87,6 +146,7 @@ namespace FitnessApp.Repositories
             return workout;
         }
 
+        // Creates and fills in a performed exercise
         public async Task<PerformedExercise> CreatePerformedExercise(PerformedExerciseModel exercise, int workoutFormId)
         {
             var performedExercise = new PerformedExercise()

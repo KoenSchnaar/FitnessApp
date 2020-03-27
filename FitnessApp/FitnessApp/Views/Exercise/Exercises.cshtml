@@ -1,19 +1,15 @@
 ﻿@model List<ExerciseModel>
 
-<h1>Exercises</h1>
+<h1 class="text-center">Exercises</h1>
 
-<table class="table-content">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Discription</th>
-            <th>Muscle Group</th>
-            <th></th>
-        </tr>
-    </thead>
+<hr />
+<div class="container">
+    <div class="row">
+        @foreach (var Exercise in Model)
+        {
+            <partial name="_ExerciseSummary" model="Exercise" />
+        }
+    </div>
+</div>
 
-        @Html.DisplayForModel()
-
-</table>
 

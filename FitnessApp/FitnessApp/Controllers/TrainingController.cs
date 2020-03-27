@@ -11,23 +11,17 @@ namespace FitnessApp.Controllers
     public class TrainingController : Controller
     {
         private readonly IExerciseRepository exerciseRepo;
-        private readonly IPerformedExerciseRepository performedExerciseRepo;
-        private readonly IRepsOfExerciseRepository repsOfExerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
         private readonly IWorkoutRepository workoutRepo;
         private readonly ITrainingRepository trainingRepo;
 
         public TrainingController(IExerciseRepository ExerciseRepo,
-            IPerformedExerciseRepository performedExerciseRepo,
-            IRepsOfExerciseRepository repsOfExerciseRepo,
             IWorkoutFormRepository workoutFormRepo,
             IWorkoutRepository workoutRepo,
             ITrainingRepository trainingRepo
             )
         {
             exerciseRepo = ExerciseRepo;
-            this.performedExerciseRepo = performedExerciseRepo;
-            this.repsOfExerciseRepo = repsOfExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
             this.trainingRepo = trainingRepo;
@@ -36,7 +30,6 @@ namespace FitnessApp.Controllers
         public async Task<IActionResult> ShowSchedules()
         {
             var schedules = await trainingRepo.GetAllSchedules();
-            //var completeSchedules = AddWorkoutsToSchedules(List < TrainingModel > trainingModels)
 
             return View(schedules);
         }
@@ -57,7 +50,11 @@ namespace FitnessApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSchedule1(TrainingModel training)
         {
-            return RedirectToAction("AddSchedule2", training);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("AddSchedule2", training);
+            }
+            return View();
         }
 
         public async Task<IActionResult> AddSchedule2(TrainingModel training)
@@ -81,6 +78,33 @@ namespace FitnessApp.Controllers
             var workouts = await workoutRepo.GetWorkoutsByIds(ids);
             var trainingSchedule = await trainingRepo.GetScheduleById(trainingId, workouts);
             return View(trainingSchedule);
+        }
+
+        public async Task<IActionResult> Edit(int trainingId)
+        {
+            var ids = await trainingRepo.GetWorkoutsIdsFromTraining(trainingId);
+            var workouts = await workoutRepo.GetWorkoutsByIds(ids);
+            var trainingSchedule = await trainingRepo.GetScheduleById(trainingId, workouts);
+            return View(trainingSchedule);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(TrainingModel schedule)
+        {
+            if (ModelState.IsValid)
+            {
+                await trainingRepo.Edit(schedule);
+                TempData["Message"] = "You have succesfully changed your training schedule!";
+                return RedirectToAction("ShowSchedules");
+            }
+            return View();
+
+        }
+
+        public async Task<IActionResult> Delete(int trainingId)
+        {
+            await trainingRepo.Delete(trainingId);
+            return RedirectToAction("ShowSchedules");
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model FitnessApp.Models.ExerciseModel
+
+<div class="col-md-3">
+    <div class="border rounded p-1">
+        <div class="text-center">
+            <a class="btn-link text-dark" asp-controller="Exercise" asp-action="ShowExercise" asp-route-exerciseId="@Model.ExerciseId">
+                <h3>@Model.Name</h3>
+            </a>
+        </div>
+
+        <img class="img-fluid" src="@Model.ImagePath" alt="Card image cap">
+
+        <div>
+            <p>@Model.MuscleGroup</p>
+            <p>@Model.Discription</p>
+            <div>
+                <a asp-controller="Exercise" asp-action="Edit" asp-route-exerciseId="@Model.ExerciseId"><img src="..\..\Images\EditIcon.png" width="25" height="25" /></a>
+                <a asp-controller="Exercise" asp-action="Delete" asp-route-exerciseId="@Model.ExerciseId"><img src="..\..\Images\DeleteIcon.png" width="25" height="25" /></a>
+            </div>
+        </div>
+    </div>
+</div>

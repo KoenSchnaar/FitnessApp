@@ -2,20 +2,24 @@
 
 <h1>@Model.Name</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Muscle group</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < @Model.Workouts.Count(); i++)
-        {
-        <tr>
-            <td>@Model.Workouts[i].Name</td>
-            <td>@Model.Workouts[i].MuscleGroup</td>
-        </tr>
-        }
-    </tbody>
-</table>
+<div align="center">
+    <table class="darkTable wide">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Muscle group</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < @Model.Workouts.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.Workouts[i].Name</td>
+                    <td>@Model.Workouts[i].MuscleGroup</td>
+                    <td><a class="btn-link text-white" asp-controller="Workout" asp-action="UseWorkout" asp-route-workoutId="@Model.Workouts[i].WorkoutModelId">Use</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,1 +1,1 @@
-fd
+Waarom moet ik 2x de scripts loaden in layout page?

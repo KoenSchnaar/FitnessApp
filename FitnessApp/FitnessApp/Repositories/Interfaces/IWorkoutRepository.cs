@@ -8,6 +8,7 @@ namespace FitnessApp.Repositories
     {
         Task AddWorkout(List<ExerciseModel> exercises, int workoutId);
         Task<List<WorkoutModel>> GetWorkouts();
+        Task EditWorkout(WorkoutModel workoutMdl);
         Task<List<WorkoutModel>> GetWorkoutsByIds(List<int> workoutIds);
         Task<WorkoutModel> GetWorkout(int workoutId);
         Task<int> CreateWorkout(List<int> selectedExercises, string name, string muscleGroup);
@@ -15,6 +16,5 @@ namespace FitnessApp.Repositories
         public void AddReps(WorkoutModel workout);
         Task DeleteWorkout(int workoutId);
         Task DeleteExercise(int workoutId, int exerciseId);
-        //Task<List<TrainingModel>> AddWorkoutsToSchedules(List<TrainingModel> trainingModels);
     }
 }

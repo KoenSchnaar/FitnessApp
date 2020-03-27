@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200310152714_TrainingSchedule.cs" />
+    <Compile Remove="Data\Migrations\20200310152714_&#xD;&#xA;             .cs" />
     <Compile Remove="Data\Migrations\20200310152714_TrainingSchedule.Designer.cs" />
     <Compile Remove="Data\Migrations\20200310153420_TrainingScheduleFK.cs" />
     <Compile Remove="Data\Migrations\20200310153420_TrainingScheduleFK.Designer.cs" />
@@ -29,6 +29,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="OdeToCode.UseNodeModules" Version="3.0.0" />
   </ItemGroup>
 
 </Project>

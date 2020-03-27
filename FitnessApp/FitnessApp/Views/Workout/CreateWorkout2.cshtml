@@ -3,34 +3,37 @@
     ViewData["Title"] = "CreateWorkout";
 }
 
-<h1>Declare your number of sets</h1>
+<h1 class="text-center">Declare your number of sets</h1>
 
-<form method="post">
-<table class="table-content">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Number of sets</th>
+<hr />
+<div align="center">
+    <form method="post">
+        <table class="darkTable form">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number of sets</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Exercises.Count(); i++)
-        {
-            <tr>
-                @Html.HiddenFor(m => m.Exercises[i].ExerciseId)
-                @Html.HiddenFor(m => m.Exercises[i].Name)
-                @Html.HiddenFor(m => m.Exercises[i].MuscleGroup)
-                @Html.HiddenFor(m => m.Exercises[i].Discription)
-                @Html.HiddenFor(m => m.Name)
-                @Html.HiddenFor(m => m.MuscleGroup)
-                @Html.HiddenFor(m => m.WorkoutModelId)
-                <td>@Model.Exercises[i].Name</td>
-                <td>@Html.TextBoxFor(m => m.Exercises[i].NrOfSets, new { @class = "resizedTextbox form-control" })</td>
-            </tr>
-        }
-            
-    </tbody>
-</table>
-    <button class="btn-primary btn" asp-controller="Workout" asp-action="CreateWorkout2">Next</button>
-</form>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Exercises.Count(); i++)
+                {
+                    <tr>
+                        @Html.HiddenFor(m => m.Exercises[i].ExerciseId)
+                        @Html.HiddenFor(m => m.Exercises[i].Name)
+                        @Html.HiddenFor(m => m.Exercises[i].MuscleGroup)
+                        @Html.HiddenFor(m => m.Exercises[i].Discription)
+                        @Html.HiddenFor(m => m.Name)
+                        @Html.HiddenFor(m => m.MuscleGroup)
+                        @Html.HiddenFor(m => m.WorkoutModelId)
+                        <td>@Model.Exercises[i].Name</td>
+                        <td>@Html.TextBoxFor(m => m.Exercises[i].NrOfSets, new { @class = "resizedTextbox form-control" })</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <button class="btn-dark btn tableBtn" asp-controller="Workout" asp-action="CreateWorkout2">Next</button>
+    </form>
+</div>

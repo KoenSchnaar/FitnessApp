@@ -29,6 +29,9 @@ namespace FitnessApp.Data.Migrations
                     b.Property<string>("Discription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MuscleGroup")
                         .HasColumnType("nvarchar(max)");
 

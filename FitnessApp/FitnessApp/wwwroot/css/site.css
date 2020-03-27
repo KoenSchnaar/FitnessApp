@@ -1,23 +1,32 @@
 ﻿/* Banner */
-#homePage {
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../Images/HomeImage2.jpg);
-    height: 100vh;
+.banner {
+    margin-top: 30px;
+    height: 220px; 
+    background-image: url(../Images/HomeImage2.jpg);
     background-size: cover;
-    background-position: center;
+    background-position: center -125px;
 }
 
 
 /* Provide sufficient contrast against white background */
 a {
-    color: #0366d6;
+    color: #fff;
 }
 
+a:hover{
+    text-decoration: none;
+    color: grey;
+}
+
+.icon{
+    padding: 5px;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
-  position: relative;
-  min-height: 100%;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 @media (min-width: 768px) {
   html {
@@ -25,95 +34,55 @@ html {
   }
 }
 
+h1{
+    text-align: center;
+}
+
 body {
-    background-color: darkgrey;
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    background-color: #696969;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      white-space: nowrap;
+      line-height: 60px; /* Vertically center the text there */
 }
+
+.border-top-black {
+    border-top: 1px solid #343a40;
+}
+
+
+
+
+
+/* font awesome ---------------------------------------------------------------------- font awesome*/
+.dropDownArrow {
+    cursor: pointer;
+}
+
+
+
+
 
 
 /* Nav bar ---------------------------------------------------------------------- Nav bar*/
- /* Navbar container */
-.navbar1 {
-  overflow: hidden;
-  font-family: Arial;
+/* Navbar container */
+.nav-link {
+    color: #fff;
 }
 
-/* Links inside the navbar */
-.navbar1 a {
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+.nav-link:hover {
+    color: grey;
 }
-
-/* The dropdown container */
-.dropdown1 {
-  float: left;
-  overflow: hidden;
-}
-
-/* Dropdown button */
-.dropdown1 .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar1 a:hover, .dropdown1:hover .dropbtn {
-  border: 1px solid white;
-  background-color: #00d478;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown1-content {
-  display: none;
-  position: absolute;
-  background-color: darkgrey;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown1-content a {
-  float: none;
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown1-content a:hover {
-  background-color: #00d478;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown1:hover .dropdown1-content {
-  display: block;
-} 
 
 /* Login aligned right*/
 .LoginService {
-    float: right;
+    margin: 10px;
 }
 
 .LoginSomething {
@@ -121,68 +90,77 @@ footer {
     float: right;
 }
 
-
-/* Table views layout*/
-td {
-    padding-right: 15px;
+.loginBtn{
+    color: #fff;
 }
 
-th {
-    padding-right: 15px;
-    /*border-bottom: 1px solid #ddd;
-    border-bottom-style: double;*/
-    background-color: #00d478;
-    color: white;
+.loginBtn:hover {
+    color: grey;
 }
 
-thead {
-    padding-bottom: 30px;
-    margin-bottom: 30px;
+.loginBtn:hover{
+    text-decoration: none;
 }
 
-tr:hover {
-    background-color: #f5f5f5;
+.logoutBtn {
+    color: #fff;
 }
 
-/* Table layout */
+.logoutBtn:hover {
+    color: grey;
+}
 
-.table-content{
-    border-collapse: collapse;
-    margin: 25px 0px;
-    font-size: 0.9em;
-    border-radius: 5px 5px 0px 0px;
+
+
+
+
+
+
+/************************************** Table layout **************************************/
+.darkTable {
+    color: #fff;
+    background-color: #343a40;
+    border-radius: 5px 5px 5px 5px;
     overflow: hidden;
 }
 
-.table-content th, table-content td{
-    padding: 12px 15px;
+th {
+    background-color: #2d3338;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: left;
 }
 
-.SetsWeight th{
-    padding-bottom: 0px;
-    padding-top: 0px;
-    text-align: center;
+td {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
 }
 
-.table-content td{
-    padding: 5px 5px 5px 5px;
+
+.wide td:not(:first-child) {
+    padding-right: 80px;
 }
 
-.table-content tr:last-of-type{
-    border-bottom: 2px solid #00d478;
+.tableBtn{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.SetsWeight td:nth-child(2n+1) {
-    border-right: 1px solid #00d478;
+tbody tr:hover {
+    background-color: #2d3338;
 }
 
-/* Font layout */
-/*body, html {
-    font-family: 'Lato', monospace;
-}*/
 
 
-/* Checkbox layout */
+
+
+
+/************************************** Checkbox layout **************************************/
 .label__checkbox {
     display: none;
 }
@@ -206,7 +184,7 @@ tr:hover {
 {
     opacity: 0.2;
     font-size: ~'calc(1rem + 1vw)';
-    color: transparent;
+    /*color: transparent;*/
     transition: opacity .3s .1s ease;
     -webkit-text-stroke: 3px rgba(0,0,0,.5);
 }
@@ -233,6 +211,97 @@ tr:hover {
 }
 
 
+
+
+/************************************** Textboxes **************************************/
+.resizedTextbox {
+    width: 50px;
+    height: 20px
+}
+
+.resizedTextbox2 {
+    width: 40%;
+    height: 25px;
+}
+
+
+
+
+/************************************** Cards **************************************/
+.card-img-top {
+    width: 100%;
+    /*height: 15vw;*/
+    object-fit: cover;
+}
+
+
+.content{
+    margin-top: 50px;
+}
+
+.cardButton {
+    border: 1px solid black;
+    width: 320px;
+    color: white;
+    background-color: #343a40;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.cardButton:hover {
+    text-decoration: none;
+    color: grey;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.cardBtn-header {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+.cardBtn-body {
+    padding-top: 5px;
+}
+
+
+
+
+
+/************************************** Resonsive css **************************************/
+/************************************** cards **************************************/
+@media (min-width:356px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width:576px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width:768px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width:992px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width:1200px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+
+
+
+/************************************** checkboxes **************************************/
 @keyframes icon {
     from {
         opacity: 0;
@@ -284,15 +353,3 @@ tr:hover {
         opacity: 1;
     }
 }
-
-/* Textboxes */
-.resizedTextbox {
-    width: 50px;
-    height: 20px
-}
-
-.resizedTextbox2 {
-    width: 40%;
-    height: 25px;
-}
-

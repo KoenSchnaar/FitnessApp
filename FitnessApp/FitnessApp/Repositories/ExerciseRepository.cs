@@ -4,6 +4,7 @@ using FitnessApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,6 +32,12 @@ namespace FitnessApp.Repositories
                     Discription = exercise.Discription,
                     MuscleGroup = exercise.MuscleGroup
                 };
+
+                if (exercise.ImagePath != null)
+                {
+                    newModel.ImagePath = exercise.ImagePath;
+                };
+
                 exercises.Add(newModel);
             }
             return exercises;
@@ -38,6 +45,7 @@ namespace FitnessApp.Repositories
 
         public async Task<ExerciseModel> GetExercise(int exerciseId)
         {
+
             var entity = await context.Exercises.SingleAsync(e => e.ExerciseId == exerciseId);
 
             ExerciseModel newModel = new ExerciseModel
@@ -45,8 +53,15 @@ namespace FitnessApp.Repositories
                 ExerciseId = entity.ExerciseId,
                 Name = entity.Name,
                 Discription = entity.Discription,
-                MuscleGroup = entity.MuscleGroup
+                MuscleGroup = entity.MuscleGroup,
+                ImagePath = entity.ImagePath
             };
+
+            if(entity.ImagePath != null)
+            {
+                newModel.ImagePath = entity.ImagePath;
+            }
+
             return newModel;
         }
 
@@ -69,6 +84,12 @@ namespace FitnessApp.Repositories
                     Discription = exercise.Discription,
                     MuscleGroup = exercise.MuscleGroup
                 };
+
+                if (exercise.ImagePath != null)
+                {
+                    newModel.ImagePath = exercise.ImagePath;
+                };
+
                 exercises.Add(newModel);
             }
             return exercises;
@@ -80,10 +101,24 @@ namespace FitnessApp.Repositories
             {
                 Name = exercise.Name,
                 Discription = exercise.Discription,
-                MuscleGroup = exercise.MuscleGroup
+                MuscleGroup = exercise.MuscleGroup,
+                ImagePath = exercise.ImagePath
             };
 
             context.Exercises.Add(Exercise);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Edit(ExerciseModel exercise)
+        {
+            var Exercise = await context.Exercises.SingleOrDefaultAsync(m => m.ExerciseId == exercise.ExerciseId);
+
+            Exercise.Name = exercise.Name;
+            Exercise.Discription = exercise.Discription;
+            Exercise.MuscleGroup = exercise.MuscleGroup;
+            Exercise.ImagePath = exercise.ImagePath;
+
+
             await context.SaveChangesAsync();
         }
 
