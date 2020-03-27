@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FitnessApp.FileTransfers;
 using FitnessApp.Models;
 using FitnessApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace FitnessApp.Controllers
 
         public ActionResult Add()
         {
-            return View();
+            return View(new ExerciseModel());
         }
 
         [HttpPost]
@@ -37,6 +38,11 @@ namespace FitnessApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (exercise.ImageUpload != null)
+                {
+                    Upload upload = new Upload();
+                    upload.UploadPicture(exercise.ImageUpload);
+                }
                 await exerciseRepo.AddExercise(exercise);
                 return RedirectToAction("Add");
             }

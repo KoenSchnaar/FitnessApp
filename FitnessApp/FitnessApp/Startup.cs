@@ -64,6 +64,9 @@ namespace FitnessApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // zelf toegevoegd
+            app.UseNodeModules();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

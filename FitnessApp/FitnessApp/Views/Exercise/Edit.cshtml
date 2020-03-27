@@ -7,8 +7,8 @@
 <h1>@Model.Name</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card card-body bg-light">
+    <div class="col-md-6 offset-md-3">
         <form asp-action="Edit" asp-controller="Exercise" method="post">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -40,6 +40,6 @@
     </div>
 </div>
 
-<div>
+<div class="col-md-6 offset-md-3">
     <a asp-action="Exercises">Back to exercises</a>
 </div>
