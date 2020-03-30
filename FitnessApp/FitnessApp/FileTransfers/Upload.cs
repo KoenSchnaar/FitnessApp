@@ -11,15 +11,22 @@ namespace FitnessApp.FileTransfers
 {
     public class Upload
     {
+        public Upload()
+        {
+
+        }
+
         public ExerciseModel UploadPicture(ExerciseModel exerciseMdl)
         {
-            if(exerciseMdl.ImageUpload != null)
+            if (exerciseMdl.ImageUpload != null)
             {
-                var fileName = Path.GetFileNameWithoutExtension(exerciseMdl.ImageUpload.FileName);
-                var extension = Path.GetExtension(exerciseMdl.ImageUpload.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                exerciseMdl.ImagePath = @"..\..\Images\ExercisePictures\" + fileName;
-                exerciseMdl.ImageUpload.SaveAs(Path.Combine(Server.MapPath(@"..\..\Images\ExercisePictures\"), fileName));
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Images\\ExercisePictures", exerciseMdl.ImageUpload.FileName);
+                exerciseMdl.ImagePath = @"..\..\Images\ExercisePictures\" + exerciseMdl.ImageUpload.FileName;
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    exerciseMdl.ImageUpload.CopyTo(stream);
+                }
                 return exerciseMdl;
             }
             return null;
