@@ -56,7 +56,7 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateWorkout3(WorkoutModel workout)
+        public IActionResult CreateWorkout3(WorkoutModel workout)
         {
             workoutRepo.AddReps(workout);
             return RedirectToAction("CreateWorkout4", new { workoutId = workout.WorkoutModelId });

@@ -28,6 +28,12 @@ namespace FitnessApp.Controllers
             return View(exercises);
         }
 
+        public async Task<IActionResult> ExercisesAngular()
+        {
+            var exercises = await exerciseRepo.GetAllExercises();
+            return View(exercises);
+        }
+       
         public ActionResult Add()
         {
             return View(new ExerciseModel());

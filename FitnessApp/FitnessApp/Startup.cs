@@ -40,6 +40,11 @@ namespace FitnessApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
+                //.AddNewtonsoftJson(options =>
+                //{
+                //    options.SerializerSettings = new JsonSerializerSettings() { … };
+                //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

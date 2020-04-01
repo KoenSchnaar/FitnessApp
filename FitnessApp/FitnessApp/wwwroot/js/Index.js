@@ -8,16 +8,33 @@ button.on("click", function () {
 });
 
 
+
+
 // Pop-up Exercise Info
-var exerciseInfo = $(".popupExerciseInfo");
-exerciseInfo.hide();
+//var $popupInfo = $(".popupInfo");
+//$popupInfo.hide();
 
+$(document).ready(function () {
 
-var exerciseInfoBtn = $(".exerciseInfoBtn");
-exerciseInfoBtn.on("click", function () {
-    console.log("You clicked " + $(this).text())
-    exerciseInfo.toggle();
+    $('#Collapsable-Panels .popupInfo').hide();
+
+    $('#Collapsable-Panels a .expandBtn').on("click", (function (e) {
+        $(this).parent().next('#Collapsable-Panels .popupInfo').toggle();
+        $(this).parent().toggleClass('active');
+        e.preventDefault();
+    }));
 });
+
+
+
+
+
+
+//var exerciseInfoBtn = $(".exerciseInfoBtn");
+//exerciseInfoBtn.on("click", function () {
+//    console.log("You clicked " + $(this).text())
+//    exerciseInfo.toggle();
+//});
 
 // image preview onchange
 function ShowImagePreview(imageUploader, previewImage) {

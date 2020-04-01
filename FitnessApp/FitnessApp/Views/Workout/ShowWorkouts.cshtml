@@ -5,47 +5,53 @@
 
 <h1 style="text-align: center">Workouts</h1>
 <hr />
-@for (int i = 0; i < @Model.Count(); i++)
-{
-    <div class="card text-center bg-dark text-white">
-        <div class="card-header d-flex justify-content-between">
-            <div class="text-left" style="width: 100px; font-weight:300;">@(i + 1)</div>
-            <div>
-                <a asp-controller="Workout" asp-action="ShowWorkout" asp-route-workoutId="@Model[i].WorkoutModelId"><h5>@Model[i].Name</h5></a>
-            </div>
-            <div style="width: 100px;">
-                <a asp-controller="Workout" asp-action="EditWorkout" asp-route-workoutId="@Model[i].WorkoutModelId" class="icon"><img src="..\..\Images\EditIconWhite.png" width="25" height="25" /></a>
 
-                <a asp-controller="Workout" asp-action="DeleteWorkout" asp-route-workoutId="@Model[i].WorkoutModelId" class="icon"><img src="..\..\Images\DeleteIconWhite.png" width="25" height="25" /></a>
-            </div>
-        </div>
-        @*<div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a asp-controller="Workout" asp-action="ShowWorkout" asp-route-WorkoutId="@Model[i].WorkoutModelId" class="btn btn-primary">Look into workout</a>
-        </div>*@
 
-        <div class="popupExerciseInfo pt-1">
-            @for (int x = 0; x < @Model[i].Exercises.Count(); x++)
-            {
+
+
+<div id="Collapsable-Panels">
+    @for (int i = 0; i < @Model.Count(); i++)
+    {
+
+        <div class="card text-center bg-dark text-white">
+            <div class="card-header d-flex justify-content-between expandBtn">
+                <div class="text-left" style="width: 100px; font-weight:300;">@(i + 1)</div>
                 <div>
-                    <ul>
-                        <li>@Model[i].Exercises[x].Name</li>
-                        <li>@Model[i].Exercises[x].MuscleGroup</li>
-                        <li>@Model[i].Exercises[x].NrOfSets</li>
-                    </ul>
+                    <a asp-controller="Workout" asp-action="ShowWorkout" asp-route-workoutId="@Model[i].WorkoutModelId"><h5>@Model[i].Name</h5></a>
                 </div>
-            }
-        </div>  
+                <div style="width: 100px;">
+                    <a asp-controller="Workout" asp-action="EditWorkout" asp-route-workoutId="@Model[i].WorkoutModelId" class="icon"><img src="..\..\Images\EditIconWhite.png" width="25" height="25" /></a>
 
-        <div class="card-footer text-muted d-flex justify-content-between">
-            <div></div>
-            <div>
-                Created on: @Model[i].DateCreated
+                    <a asp-controller="Workout" asp-action="DeleteWorkout" asp-route-workoutId="@Model[i].WorkoutModelId" class="icon"><img src="..\..\Images\DeleteIconWhite.png" width="25" height="25" /></a>
+                </div>
             </div>
-            <div class="dropDownArrow">
-                <i class="fa fa-angle-down exerciseInfoBtn"></i>
+
+            <p><a class="expandBtn" href="#">Expand</a></p>
+
+            @* this is hidden *@
+            <div class="popupInfo">
+                @for (int x = 0; x < @Model[i].Exercises.Count(); x++)
+                {
+                    <div>
+                        <ul>
+                            <li>@Model[i].Exercises[x].Name</li>
+                            <li>@Model[i].Exercises[x].MuscleGroup</li>
+                            <li>@Model[i].Exercises[x].NrOfSets</li>
+                        </ul>
+                    </div>
+                }
             </div>
-        </div>
-        
-    </div><br />
-}
+
+            <div class="card-footer text-muted d-flex justify-content-between">
+                <div></div>
+                <div>
+                    Created on: @Model[i].DateCreated
+                </div>
+                <div>
+                    <i class="fa fa-angle-down exerciseInfoBtn"></i>
+                </div>
+            </div>
+
+        </div><br />
+    }
+</div>

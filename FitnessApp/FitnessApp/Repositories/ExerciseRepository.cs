@@ -98,7 +98,7 @@ namespace FitnessApp.Repositories
             return exercises;
         }
 
-        public async Task AddExercise(ExerciseModel exercise)
+        public async Task<Exercise> AddExercise(ExerciseModel exercise)
         {
             var Exercise = new Exercise()
             {
@@ -107,9 +107,10 @@ namespace FitnessApp.Repositories
                 MuscleGroup = exercise.MuscleGroup,
                 ImagePath = exercise.ImagePath
             };
-
             context.Exercises.Add(Exercise);
             await context.SaveChangesAsync();
+
+            return Exercise;
         }
 
         public async Task Edit(ExerciseModel exercise)

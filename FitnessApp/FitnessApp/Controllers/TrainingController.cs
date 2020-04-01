@@ -48,7 +48,7 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSchedule1(TrainingModel training)
+        public IActionResult AddSchedule1(TrainingModel training)
         {
             if (ModelState.IsValid)
             {
