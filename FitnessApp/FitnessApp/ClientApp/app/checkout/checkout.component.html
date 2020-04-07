@@ -1,0 +1,23 @@
+﻿<div class="row">
+  <div *ngIf="errorMessage" class="alert alert-warning">{{ errorMessage }}</div>
+  <h3>Confirm workout</h3>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Muscle group</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of data.workout.exercises">
+                <td><i class="fa fa-trash"></i></td>
+                <td>{{ e.name }}</td>
+                <td>{{ e.muscleGroup }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-success" (click)="onCheckout()">Complete Purchase</button>
+    <a routerLink="/" class="btn btn-info">Cancel</a>
+  </div>
+

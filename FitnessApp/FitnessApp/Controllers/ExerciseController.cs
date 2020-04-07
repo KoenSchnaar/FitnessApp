@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FitnessApp.FileTransfers;
 using FitnessApp.Models;
 using FitnessApp.Repositories;
@@ -13,13 +14,16 @@ namespace FitnessApp.Controllers
     {
         private readonly IExerciseRepository exerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
+        private readonly IMapper mapper;
 
         public ExerciseController(IExerciseRepository ExerciseRepo,
-            IWorkoutFormRepository workoutFormRepo
+            IWorkoutFormRepository workoutFormRepo,
+            IMapper mapper
             )
         {
             exerciseRepo = ExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Exercises()
