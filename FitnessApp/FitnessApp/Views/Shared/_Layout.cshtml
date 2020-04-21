@@ -66,7 +66,6 @@
         </nav>
 
     </header>
-    @*<div class="d-flex flex-row banner"></div>*@
     <div class="container">
         <main role="main" class="pb-3">
             @if (TempData["Message"] != null)
@@ -85,17 +84,43 @@
         </div>
     </footer>
 
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/Index.js"></script>
+    @*<script src="/node_modules/jquery/dist/jquery.min.js"></script>*@
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/js/Index.js"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
+        <script src="~/dist/finessApp.min.js" asp-append-version="true"></script>
+    </environment>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="~/ClientApp/runtime.js"></script>
+    <script src="~/ClientApp/polyfills.js"></script>
+    <script src="~/ClientApp/styles.js"></script>
+    <script src="~/ClientApp/vendor.js"></script>
+    <script src="~/ClientApp/main.js"></script>
+
+    <script src="~/ClientApp/runtime-es2015.js"></script>
+        <script src="~/ClientApp/polyfills-es2015.js"></script>
+        <script src="~/ClientApp/styles-es2015.js"></script>
+        <script src="~/ClientApp/vendor-es2015.js"></script>
+        <script src="~/ClientApp/main-es2015.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

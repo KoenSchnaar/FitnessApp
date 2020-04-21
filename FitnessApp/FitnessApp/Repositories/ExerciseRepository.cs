@@ -1,6 +1,7 @@
 ﻿using FitnessApp.Data;
 using FitnessApp.DatabaseClasses;
 using FitnessApp.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace FitnessApp.Repositories
     public class ExerciseRepository : IExerciseRepository
     {
         private readonly ApplicationDbContext context;
+        private readonly IWebHostEnvironment he;
 
-        public ExerciseRepository(ApplicationDbContext context)
+        public ExerciseRepository(ApplicationDbContext context, IWebHostEnvironment he)
         {
             this.context = context;
+            this.he = he;
         }
 
         public async Task<List<ExerciseModel>> GetAllExercises()
@@ -95,7 +98,7 @@ namespace FitnessApp.Repositories
             return exercises;
         }
 
-        public async Task AddExercise(ExerciseModel exercise)
+        public async Task<Exercise> AddExercise(ExerciseModel exercise)
         {
             var Exercise = new Exercise()
             {
@@ -104,9 +107,10 @@ namespace FitnessApp.Repositories
                 MuscleGroup = exercise.MuscleGroup,
                 ImagePath = exercise.ImagePath
             };
-
             context.Exercises.Add(Exercise);
             await context.SaveChangesAsync();
+
+            return Exercise;
         }
 
         public async Task Edit(ExerciseModel exercise)
@@ -127,7 +131,6 @@ namespace FitnessApp.Repositories
             var entity = await context.Exercises.SingleAsync(m => m.ExerciseId == exerciseId);
             context.Exercises.Remove(entity);
             await context.SaveChangesAsync();
-            
         }
     }
 }

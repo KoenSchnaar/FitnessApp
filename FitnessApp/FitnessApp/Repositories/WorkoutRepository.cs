@@ -279,5 +279,30 @@ namespace FitnessApp.Repositories
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task<Workout> CreateWorkoutFromModel(WorkoutModel workout)
+        {
+            var newWorkout = new Workout
+            {
+                Name = workout.Name,
+                MuscleGroup = workout.MuscleGroup
+            };
+
+            context.Workouts.Add(newWorkout);
+            await context.SaveChangesAsync();
+
+            foreach (var exercise in workout.Exercises)
+            {
+                var selectedExercise = new WorkoutRef()
+                {
+                    WorkoutId = newWorkout.WorkoutId,
+                    ExerciseId = exercise.ExerciseId
+                };
+                context.WorkoutRefs.Add(selectedExercise);
+            }
+            await context.SaveChangesAsync();
+
+            return newWorkout;
+        }
     }
 }

@@ -1,0 +1,20 @@
+﻿<h3>Your workout</h3>
+<div>Number of exercises: {{ data.workout.numberOfExercises }}</div>
+
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Muscle group</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let e of data.workout.exercises">
+            <td><i class="fa fa-trash" (click)="removeExercise(e)"></i></td>
+            <td>{{ e.name }}</td>
+            <td>{{ e.muscleGroup }}</td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-dark" *ngIf="data.workout.exercises.length > 0" (click)="onCheckout()">Create</button>

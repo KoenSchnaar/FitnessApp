@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FitnessApp.FileTransfers;
 using FitnessApp.Models;
 using FitnessApp.Repositories;
@@ -13,13 +14,16 @@ namespace FitnessApp.Controllers
     {
         private readonly IExerciseRepository exerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
+        private readonly IMapper mapper;
 
         public ExerciseController(IExerciseRepository ExerciseRepo,
-            IWorkoutFormRepository workoutFormRepo
+            IWorkoutFormRepository workoutFormRepo,
+            IMapper mapper
             )
         {
             exerciseRepo = ExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Exercises()
@@ -28,6 +32,12 @@ namespace FitnessApp.Controllers
             return View(exercises);
         }
 
+        public async Task<IActionResult> ExercisesAngular()
+        {
+            var exercises = await exerciseRepo.GetAllExercises();
+            return View(exercises);
+        }
+       
         public ActionResult Add()
         {
             return View(new ExerciseModel());
@@ -41,9 +51,13 @@ namespace FitnessApp.Controllers
                 if (exercise.ImageUpload != null)
                 {
                     Upload upload = new Upload();
-                    upload.UploadPicture(exercise);
+                    var completeMdl = upload.UploadPicture(exercise);
+                    await exerciseRepo.AddExercise(completeMdl);
                 }
-                await exerciseRepo.AddExercise(exercise);
+                else
+                {
+                    await exerciseRepo.AddExercise(exercise);
+                }
                 return RedirectToAction("Add");
             }
             return View();

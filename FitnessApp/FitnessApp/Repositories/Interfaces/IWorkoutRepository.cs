@@ -1,4 +1,5 @@
-﻿using FitnessApp.Models;
+﻿using FitnessApp.DatabaseClasses;
+using FitnessApp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,5 +17,6 @@ namespace FitnessApp.Repositories
         public void AddReps(WorkoutModel workout);
         Task DeleteWorkout(int workoutId);
         Task DeleteExercise(int workoutId, int exerciseId);
+        Task<Workout> CreateWorkoutFromModel(WorkoutModel workout);
     }
 }

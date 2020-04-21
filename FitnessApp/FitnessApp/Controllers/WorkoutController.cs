@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FitnessApp.Models;
 using FitnessApp.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessApp.Controllers
@@ -13,15 +14,19 @@ namespace FitnessApp.Controllers
         private readonly IExerciseRepository exerciseRepo;
         private readonly IWorkoutFormRepository workoutFormRepo;
         private readonly IWorkoutRepository workoutRepo;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public WorkoutController(IExerciseRepository ExerciseRepo,
             IWorkoutFormRepository workoutFormRepo,
-            IWorkoutRepository workoutRepo
+            IWorkoutRepository workoutRepo,
+            UserManager<IdentityUser> userManager = null
+
             )
         {
             exerciseRepo = ExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
+            _userManager = userManager;
         }
         public async Task<IActionResult> CreateWorkout1()
         {
@@ -56,7 +61,7 @@ namespace FitnessApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateWorkout3(WorkoutModel workout)
+        public IActionResult CreateWorkout3(WorkoutModel workout)
         {
             workoutRepo.AddReps(workout);
             return RedirectToAction("CreateWorkout4", new { workoutId = workout.WorkoutModelId });
@@ -108,17 +113,27 @@ namespace FitnessApp.Controllers
 
         public async Task<IActionResult> UseWorkout(int workoutId)
         {
+            var userId = _userManager.GetUserId(HttpContext.User);
             ViewBag.LastWorkout = await workoutFormRepo.GetLastWorkoutFormById(workoutId);
             var workout = await workoutRepo.GetWorkout(workoutId);
-            var newWorkoutForm = workoutFormRepo.CreateWorkoutFormModel(workout);
+            var newWorkoutForm = workoutFormRepo.CreateWorkoutFormModel(workout, userId);
             return View(newWorkoutForm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UseWorkout(WorkoutFormModel workoutForm) 
+        public async Task<IActionResult> UseWorkout(WorkoutFormModel workoutForm)
         {
-            await workoutFormRepo.CreateTotalWorkout(workoutForm);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            await workoutFormRepo.CreateTotalWorkout(workoutForm, userId);
             return RedirectToAction("ShowSchedules", "Training");
+        }
+
+        // not yet inmplemented
+        public async Task<IActionResult> ShowLastWorkoutsFromTraining(int trainingId)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var OldworkoutForms = await workoutFormRepo.GetForms(trainingId, userId);
+            return View();
         }
     }
 }
