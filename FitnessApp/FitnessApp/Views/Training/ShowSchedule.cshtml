@@ -23,3 +23,12 @@
         </tbody>
     </table>
 </div>
+
+<div align="center">
+    @foreach (var form in ViewBag.OldForms)
+    {
+        <div>@form.Day</div>
+        <div>@form.Month</div>
+        <div>@form.Year</div>
+    }
+</div>

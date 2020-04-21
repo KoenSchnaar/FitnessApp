@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FitnessApp.Models;
 using FitnessApp.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessApp.Controllers
@@ -14,17 +15,20 @@ namespace FitnessApp.Controllers
         private readonly IWorkoutFormRepository workoutFormRepo;
         private readonly IWorkoutRepository workoutRepo;
         private readonly ITrainingRepository trainingRepo;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public TrainingController(IExerciseRepository ExerciseRepo,
             IWorkoutFormRepository workoutFormRepo,
             IWorkoutRepository workoutRepo,
-            ITrainingRepository trainingRepo
+            ITrainingRepository trainingRepo,
+            UserManager<IdentityUser> userManager = null
             )
         {
             exerciseRepo = ExerciseRepo;
             this.workoutFormRepo = workoutFormRepo;
             this.workoutRepo = workoutRepo;
             this.trainingRepo = trainingRepo;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> ShowSchedules()
@@ -36,6 +40,8 @@ namespace FitnessApp.Controllers
 
         public async Task<IActionResult> ShowSchedule(int trainingScheduleId)
         {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            ViewBag.OldForms = await workoutFormRepo.GetForms(trainingScheduleId, userId);
             var ids = await trainingRepo.GetWorkoutsIdsFromTraining(trainingScheduleId);
             var workouts = await workoutRepo.GetWorkoutsByIds(ids);
             var schedule = await trainingRepo.GetScheduleById(trainingScheduleId, workouts);

@@ -18,15 +18,51 @@ namespace FitnessApp.Repositories
             this.context = context;
         }
 
-        public async Task<List<WorkoutFormModel>> GetForms()
+        public WorkoutFormModel EntityToModel(WorkoutForm form)
         {
-            return null;
+            WorkoutFormModel model = new WorkoutFormModel()
+            {
+                WorkoutFormId = form.WorkoutFormId,
+                workoutId = form.WorkoutId,
+                UserId = form.UserId,
+                Day = form.Day,
+                Month = form.Month,
+                Year = form.Year
+            };
+            return model;
         }
 
-        public WorkoutFormModel CreateWorkoutFormModel(WorkoutModel workout)
+        public async Task<List<WorkoutFormModel>> GetForms(int trainingId, string userId)
+        {
+            var trainingScheduleRefs = await context.trainingScheduleRefs.Where(t => t.TrainingScheduleId == trainingId).ToListAsync();
+            var workoutForms = new List<WorkoutFormModel>();
+            if (userId != null)
+            {
+                foreach(var workout in trainingScheduleRefs)
+                {
+                    var forms = await context.WorkoutForms.Where(forms => forms.UserId == userId && forms.WorkoutId == workout.WorkoutId).ToListAsync();
+                    foreach(var form in forms)
+                    {
+                        var formModel = EntityToModel(form);
+                        workoutForms.Add(formModel);
+                    }
+                }
+            }
+            //else
+            //{
+            //    foreach (var workout in trainingScheduleRefs)
+            //    {
+            //        var workoutForms = await context.WorkoutForms.Where(forms => forms.WorkoutId == workout.WorkoutId).ToListAsync();
+            //    }
+            //}
+            return workoutForms;
+        }
+
+        public WorkoutFormModel CreateWorkoutFormModel(WorkoutModel workout, string userId)
         {
             var workoutForm = new WorkoutFormModel
             {
+                UserId = userId,
                 workoutId = workout.WorkoutModelId,
                 Day = DateTime.Now.Day,
                 Month = DateTime.Now.Month,
@@ -109,9 +145,9 @@ namespace FitnessApp.Repositories
         }
 
         // this creates a workoutform and fills in the reps and weight of the exercises
-        public async Task CreateTotalWorkout(WorkoutFormModel workoutForm)
+        public async Task CreateTotalWorkout(WorkoutFormModel workoutForm, string userId)
         {
-            var workout = await CreateWorkoutForm(workoutForm);
+            var workout = await CreateWorkoutForm(workoutForm, userId);
 
             foreach(var exercise in workoutForm.PerformedExercises)
             {
@@ -132,10 +168,11 @@ namespace FitnessApp.Repositories
         }
 
         // creates an empty workoutForm
-        public async Task<WorkoutForm> CreateWorkoutForm(WorkoutFormModel workoutForm)
+        public async Task<WorkoutForm> CreateWorkoutForm(WorkoutFormModel workoutForm, string userId)
         {
             var workout = new WorkoutForm()
             {
+                UserId = userId,
                 WorkoutId = workoutForm.workoutId,
                 Day = DateTime.Now.Day,
                 Month = DateTime.Now.Month,
